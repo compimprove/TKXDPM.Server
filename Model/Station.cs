@@ -30,11 +30,12 @@ namespace TKXDPM_API.Model
                 new BikeResponse(),
                 new BikeResponse()
             };
+            Area = 10;
         }
         public string ContactName { get; set; }
         public string Email { get; set; } 
         public string Phone { get; set; }
-        public float Area { get; set; } = 10;
+        public float Area { get; set; }
         public AddressResponse Address { get; set; }
         public List<BikeResponse> ListBike { get; set; }
     }

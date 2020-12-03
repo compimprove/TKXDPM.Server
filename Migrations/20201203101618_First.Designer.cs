@@ -10,8 +10,8 @@ using TKXDPM_API;
 namespace TKXDPM_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201203093352_Fourth")]
-    partial class Fourth
+    [Migration("20201203101618_First")]
+    partial class First
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,22 @@ namespace TKXDPM_API.Migrations
                     b.HasKey("AddressId");
 
                     b.ToTable("Addresses");
+
+                    b.HasData(
+                        new
+                        {
+                            AddressId = 1,
+                            AddressName = "Duong Lang, Ha Noi",
+                            Latitude = 100f,
+                            Longitude = 99f
+                        },
+                        new
+                        {
+                            AddressId = 2,
+                            AddressName = "Truong Chinh, Ha Noi",
+                            Latitude = 100f,
+                            Longitude = 99f
+                        });
                 });
 
             modelBuilder.Entity("TKXDPM_API.Model.Bike", b =>
@@ -145,10 +161,7 @@ namespace TKXDPM_API.Migrations
                     b.Property<int>("RateNumber")
                         .HasColumnType("integer");
 
-                    b.Property<int>("RenterId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("RenterId1")
+                    b.Property<string>("RenterId")
                         .HasColumnType("varchar(255)");
 
                     b.HasKey("RentalId");
@@ -157,7 +170,7 @@ namespace TKXDPM_API.Migrations
 
                     b.HasIndex("CardId");
 
-                    b.HasIndex("RenterId1");
+                    b.HasIndex("RenterId");
 
                     b.ToTable("Rentals");
                 });
@@ -271,7 +284,7 @@ namespace TKXDPM_API.Migrations
 
                     b.HasOne("TKXDPM_API.Model.Renter", "Renter")
                         .WithMany()
-                        .HasForeignKey("RenterId1");
+                        .HasForeignKey("RenterId");
 
                     b.Navigation("Bike");
 
