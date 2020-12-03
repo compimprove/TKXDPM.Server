@@ -30,7 +30,7 @@ namespace TKXDPM_API
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration["ConnectionStrings:DefaultConnection"]));
-            services.AddControllers();
+            services.AddControllers(); 
             services.AddAutoMapper(typeof(Startup));
             services.AddCors(options =>
             {

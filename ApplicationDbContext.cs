@@ -17,7 +17,7 @@ namespace TKXDPM_API
             
             modelBuilder.Entity<Address>().HasData(Address.GetSeederData());
         }
-
+  
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Bike> Bikes { get; set; }
         public DbSet<BikeInStation> BikeInStation { get; set; }
