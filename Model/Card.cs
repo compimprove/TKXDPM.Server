@@ -7,7 +7,9 @@ namespace TKXDPM_API.Model
     public class Card
     {
         [Key] public int CardId { get; set; }
+        [Column(TypeName = "varchar(255)")]
         public string RenterId { get; set; }
+        public Renter Renter { get; set; }
         [Column(TypeName = "varchar(255)")]
         public string PaymentMethod { get; set; }
         public int Cvv { get; set; }

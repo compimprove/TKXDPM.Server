@@ -17,7 +17,8 @@ namespace TKXDPM_API.Controllers
         private readonly IMapper _mapper;
         private readonly ApplicationDbContext _dbContext;
 
-        public EcoBikeRentalController(ILogger<EcoBikeRentalController> logger, IMapper mapper, ApplicationDbContext dbContext)
+        public EcoBikeRentalController(ILogger<EcoBikeRentalController> logger, IMapper mapper,
+            ApplicationDbContext dbContext)
         {
             _logger = logger;
             _mapper = mapper;
@@ -76,19 +77,25 @@ namespace TKXDPM_API.Controllers
         [HttpPost("add-payment-method")]
         public async Task<ActionResult> AddPaymentMethod([FromBody] CardRequest request)
         {
+            var card = _mapper.Map<Card>(request);
+            _dbContext.Cards.Add(card);
+            await _dbContext.SaveChangesAsync();
             return Ok();
         }
-        
+
         [HttpPost("rent-bike")]
         public async Task<ActionResult> RentBike(string userId, int bikeId)
         {
             return Ok();
         }
-        
+
         [HttpPost("return-bike")]
         public async Task<ActionResult> ReturnBike(int stationId, int bikeId)
         {
-            return Ok();
+            return Ok(new
+            {
+                returnMoney = 100000
+            });
         }
     }
 }
