@@ -9,13 +9,10 @@ namespace TKXDPM_API.Model
         [Key] public int StationId { get; set; }
 
         public int AddressId { get; set; }
-
+        public Address Address { get; set; }
         [Column(TypeName = "varchar(255)")] public string ContactName { get; set; }
-
         [Column(TypeName = "varchar(255)")] public string Email { get; set; }
-
         [Column(TypeName = "varchar(255)")] public string Phone { get; set; }
-
         public float Area { get; set; }
     }
 

@@ -1,10 +1,18 @@
 using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TKXDPM_API.Model
 {
     public class Card
     {
-        
+        [Key] public int CardId { get; set; }
+        public int RenterId { get; set; }
+        [Column(TypeName = "varchar(255)")]
+        public string PaymentMethod { get; set; }
+        public int Cvv { get; set; }
+        [Column(TypeName = "varchar(255)")]
+        public string ExpirationDate { get; set; }
     }
 
     public class CardResponse
