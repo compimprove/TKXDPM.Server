@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace TKXDPM_API.Migrations
 {
-    public partial class First : Migration
+    public partial class Test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -204,6 +204,16 @@ namespace TKXDPM_API.Migrations
                     { 1, "Duong Lang, Ha Noi", 100f, 99f },
                     { 2, "Truong Chinh, Ha Noi", 100f, 99f }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Bikes",
+                columns: new[] { "BikeId", "BatterCapacity", "BikeName", "Deposit", "Description", "HourlyRent", "LicensePlates", "PowerDrain", "StartingRent", "StationId", "Type" },
+                values: new object[] { 1, 0, null, 0, null, 0, null, 0f, 0, null, 0 });
+
+            migrationBuilder.InsertData(
+                table: "Stations",
+                columns: new[] { "StationId", "AddressId", "Area", "ContactName", "Email", "Phone", "StationName" },
+                values: new object[] { 1, 1, 0f, null, null, null, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_BikeInStation_StationId",

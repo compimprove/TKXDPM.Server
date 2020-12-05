@@ -10,8 +10,8 @@ using TKXDPM_API;
 namespace TKXDPM_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201205080727_First")]
-    partial class First
+    [Migration("20201205083112_Test")]
+    partial class Test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -100,6 +100,18 @@ namespace TKXDPM_API.Migrations
                     b.HasIndex("StationId");
 
                     b.ToTable("Bikes");
+
+                    b.HasData(
+                        new
+                        {
+                            BikeId = 1,
+                            BatterCapacity = 0,
+                            Deposit = 0,
+                            HourlyRent = 0,
+                            PowerDrain = 0f,
+                            StartingRent = 0,
+                            Type = 0
+                        });
                 });
 
             modelBuilder.Entity("TKXDPM_API.Model.BikeInStation", b =>
@@ -232,6 +244,14 @@ namespace TKXDPM_API.Migrations
                     b.HasIndex("AddressId");
 
                     b.ToTable("Stations");
+
+                    b.HasData(
+                        new
+                        {
+                            StationId = 1,
+                            AddressId = 1,
+                            Area = 0f
+                        });
                 });
 
             modelBuilder.Entity("TKXDPM_API.Model.Transaction", b =>
