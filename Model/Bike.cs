@@ -1,5 +1,8 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace TKXDPM_API.Model
 {
@@ -15,6 +18,14 @@ namespace TKXDPM_API.Model
         public int BatterCapacity { get; set; }
         public float PowerDrain { get; set; }
         public int Deposit { get; set; }
+
+        public List<Rental> Rentals { get; set; }
+
+        public Rental FindRental()
+        {
+            var rentals = Rentals.Where(rental => rental.Transaction.BookedEndDateTime == DateTime.MinValue).ToArray();
+            return rentals[0];
+        }
     }
 
     public class BikeResponse
@@ -31,6 +42,7 @@ namespace TKXDPM_API.Model
             PowerDrain = 0.6F;
             Deposit = 100000;
         }
+
         public string BikeName { get; set; }
         public string Description { get; set; }
         public int StartingRent { get; set; }

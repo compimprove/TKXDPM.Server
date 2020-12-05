@@ -14,7 +14,7 @@ namespace TKXDPM_API.Model
         public string PaymentMethod { get; set; }
         public int Cvv { get; set; }
         [Column(TypeName = "varchar(255)")]
-        public string ExpirationDate { get; set; }
+        public DateTime ExpirationDate { get; set; }
     }
 
     public class CardRequest
@@ -22,7 +22,7 @@ namespace TKXDPM_API.Model
         public string RenterId { get; set; }
         public string PaymentMethod { get; set; }
         public int Cvv { get; set; }
-        public string ExpirationDate { get; set; }
+        public DateTime ExpirationDate { get; set; }
     }
 
     public class CardResponse

@@ -13,6 +13,7 @@ namespace TKXDPM_API.Model
         [Column(TypeName = "varchar(255)")]
         [Key] public string RenterId { get; set; }
         public string Name { get; set; }
+        public Rental Rental { get; set; }
     }
 
 }

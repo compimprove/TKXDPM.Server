@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using TKXDPM_API.Model;
 
@@ -84,18 +85,74 @@ namespace TKXDPM_API.Controllers
         }
 
         [HttpPost("rent-bike")]
-        public async Task<ActionResult> RentBike(string userId, int bikeId)
+        public async Task<ActionResult> RentBike(string userId, int bikeId, int stationId)
         {
+            if (await HasRentBike(userId, bikeId))
+            {
+                return BadRequest($"UserID {userId} has rent another bike");
+            }
+
+            var bikeInStations
+                = from bikeInStation in _dbContext.BikeInStation
+                where bikeInStation.BikeId == bikeId && bikeInStation.StationId == stationId
+                select bikeInStation;
+            _dbContext.RemoveRange(bikeInStations);
+            var newRental = new Rental()
+            {
+                BikeId = bikeId,
+                RenterId = userId
+            };
+            var transaction = new Transaction()
+            {
+                Rental = newRental,
+                PaymentStatus = false,
+                BookedStartDateTime = DateTime.Now
+            };
+            _dbContext.Add(newRental);
+            _dbContext.Add(transaction);
+            await _dbContext.SaveChangesAsync();
             return Ok();
+        }
+
+        private async Task<bool> HasRentBike(string userId, int bikeId)
+        {
+            var oldRentals = await (from rental in _dbContext.Rentals
+                where rental.BikeId == bikeId && rental.RenterId == userId
+                select rental).ToListAsync();
+            var hasRent = oldRentals.Any(rental => rental.Transaction.BookedEndDateTime == DateTime.MinValue || rental.Transaction.BookedEndDateTime >= DateTime.Now);
+            return hasRent;
         }
 
         [HttpPost("return-bike")]
         public async Task<ActionResult> ReturnBike(int stationId, int bikeId)
         {
+            if (await BikeInStation(bikeId, stationId))
+            {
+                return BadRequest();
+            }
+            
+            var bikeStation = new BikeInStation()
+            {
+                BikeId = bikeId,
+                StationId = stationId,
+                DateTimeIn = DateTime.Now
+            };
+            _dbContext.Add(bikeStation);
+            await _dbContext.SaveChangesAsync();
             return Ok(new
             {
                 returnMoney = 100000
             });
+        }
+
+        private async Task<bool> BikeInStation(int bikeId, int stationId)
+        {
+            var bikeInStations
+                = await (from bikeInStation in _dbContext.BikeInStation
+                    where bikeInStation.BikeId == bikeId
+                          && bikeInStation.StationId == stationId
+                    select bikeInStation).ToListAsync();
+            return bikeInStations.Count != 0;
         }
     }
 }

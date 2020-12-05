@@ -10,10 +10,10 @@ namespace TKXDPM_API.Model
         public int RentalId { get; set; }
         public Rental Rental { get; set; }
         [Column(TypeName = "varchar(255)")]
-        public string PaymentStatus { get; set; }
-        public DateTime BookedStartDateTime { get; set; }
-        public DateTime BookedEndDateTime { get; set; }
-        public DateTime ActualStartDateTime { get; set; }
-        public DateTime ActualEndDateTime { get; set; }
+        public bool PaymentStatus { get; set; }
+        public DateTime BookedStartDateTime { get; set; } = DateTime.MinValue;
+        public DateTime BookedEndDateTime { get; set; } = DateTime.MinValue;
+        public DateTime ActualStartDateTime { get; set; } = DateTime.MinValue;
+        public DateTime ActualEndDateTime { get; set; } = DateTime.MinValue;
     }
 }
