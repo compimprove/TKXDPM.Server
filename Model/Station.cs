@@ -14,12 +14,16 @@ namespace TKXDPM_API.Model
         [Column(TypeName = "varchar(255)")] public string Email { get; set; }
         [Column(TypeName = "varchar(255)")] public string Phone { get; set; }
         public float Area { get; set; }
+        
+        public List<Bike> ListBike { get; set; }
     }
 
     public class StationResponse
     {
         public StationResponse()
         {
+            StationId = 1;
+            AddressId = 1;
             ContactName = "ContactName";
             Email = "Email";
             Phone = "Phone";
@@ -32,6 +36,9 @@ namespace TKXDPM_API.Model
             };
             Area = 10;
         }
+        
+        public int StationId { get; set; }
+        public int AddressId { get; set; }
         public string ContactName { get; set; }
         public string Email { get; set; } 
         public string Phone { get; set; }

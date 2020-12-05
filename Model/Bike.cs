@@ -32,6 +32,7 @@ namespace TKXDPM_API.Model
     {
         public BikeResponse()
         {
+            BikeId = 1;
             BikeName = "BikeName";
             Description = "Address";
             StartingRent = 10;
@@ -43,6 +44,7 @@ namespace TKXDPM_API.Model
             Deposit = 100000;
         }
 
+        public int BikeId { get; set; }
         public string BikeName { get; set; }
         public string Description { get; set; }
         public int StartingRent { get; set; }
@@ -52,6 +54,7 @@ namespace TKXDPM_API.Model
         public int BatterCapacity { get; set; }
         public float PowerDrain { get; set; }
         public int Deposit { get; set; }
+        public List<RentalResponse> Rentals { get; set; }
     }
 
     public enum BikeType

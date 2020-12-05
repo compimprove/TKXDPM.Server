@@ -58,19 +58,19 @@ namespace TKXDPM_API.Controllers
         }
 
         [HttpGet("get-bike")]
-        public async Task<ActionResult> GetListBike(int bikeId)
+        public async Task<ActionResult> GetBike(int bikeId)
         {
             return Ok(new BikeResponse());
         }
 
         [HttpGet("get-payment-method")]
-        public async Task<ActionResult> GetCard(string userId)
+        public async Task<ActionResult> GetCard(string deviceCode)
         {
             return Ok(new CardResponse());
         }
 
         [HttpGet("get-rental-info")]
-        public async Task<ActionResult> GetRentalInfoBikeById(string userId)
+        public async Task<ActionResult> GetRentalInfoBikeById(string deviceCode)
         {
             return Ok(new RentalResponse());
         }
@@ -85,8 +85,9 @@ namespace TKXDPM_API.Controllers
         }
 
         [HttpPost("rent-bike")]
-        public async Task<ActionResult> RentBike(string userId, int bikeId, int stationId)
+        public async Task<ActionResult> RentBike(string deviceCode, int bikeId, int stationId)
         {
+            var userId = 1;
             if (await HasRentBike(userId, bikeId))
             {
                 return BadRequest($"UserID {userId} has rent another bike");
@@ -114,7 +115,7 @@ namespace TKXDPM_API.Controllers
             return Ok();
         }
 
-        private async Task<bool> HasRentBike(string userId, int bikeId)
+        private async Task<bool> HasRentBike(int userId, int bikeId)
         {
             var oldRentals = await (from rental in _dbContext.Rentals
                 where rental.BikeId == bikeId && rental.RenterId == userId

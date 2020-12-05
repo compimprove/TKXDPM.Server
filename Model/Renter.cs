@@ -7,13 +7,30 @@ namespace TKXDPM_API.Model
     {
         public Renter()
         {
-            RenterId = "1011-5004";
+            RenterId = 1;
+            DeviceCode = "1011-5004";
             Name = "Nguyen Van Cao";
         }
+        
+        [Key] public int RenterId { get; set; }
         [Column(TypeName = "varchar(255)")]
-        [Key] public string RenterId { get; set; }
         public string Name { get; set; }
+        [Column(TypeName = "varchar(255)")]
+        public string DeviceCode { get; set; }
         public Rental Rental { get; set; }
+    }
+
+    public class RenterResponse
+    {
+        public RenterResponse()
+        {
+            RenterId = 1;
+            DeviceCode = "1011-5004";
+            Name = "Nguyen Van Cao";
+        }
+        public int RenterId { get; set; }
+        public string Name { get; set; }
+        public string DeviceCode { get; set; }
     }
 
 }
