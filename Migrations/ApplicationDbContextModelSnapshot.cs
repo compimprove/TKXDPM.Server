@@ -87,10 +87,15 @@ namespace TKXDPM_API.Migrations
                     b.Property<int>("StartingRent")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("StationId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
                     b.HasKey("BikeId");
+
+                    b.HasIndex("StationId");
 
                     b.ToTable("Bikes");
                 });
@@ -127,13 +132,14 @@ namespace TKXDPM_API.Migrations
                         .HasColumnType("integer");
 
                     b.Property<string>("ExpirationDate")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("PaymentMethod")
                         .HasColumnType("varchar(255)");
 
-                    b.Property<string>("RenterId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("RenterId")
+                        .HasColumnType("integer");
 
                     b.HasKey("CardId");
 
@@ -161,8 +167,8 @@ namespace TKXDPM_API.Migrations
                     b.Property<int>("RateNumber")
                         .HasColumnType("integer");
 
-                    b.Property<string>("RenterId")
-                        .HasColumnType("varchar(255)");
+                    b.Property<int>("RenterId")
+                        .HasColumnType("integer");
 
                     b.HasKey("RentalId");
 
@@ -170,18 +176,24 @@ namespace TKXDPM_API.Migrations
 
                     b.HasIndex("CardId");
 
-                    b.HasIndex("RenterId");
+                    b.HasIndex("RenterId")
+                        .IsUnique();
 
                     b.ToTable("Rentals");
                 });
 
             modelBuilder.Entity("TKXDPM_API.Model.Renter", b =>
                 {
-                    b.Property<string>("RenterId")
+                    b.Property<int>("RenterId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .UseIdentityByDefaultColumn();
+
+                    b.Property<string>("DeviceCode")
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("RenterId");
 
@@ -210,6 +222,9 @@ namespace TKXDPM_API.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("StationName")
+                        .HasColumnType("text");
+
                     b.HasKey("StationId");
 
                     b.HasIndex("AddressId");
@@ -237,6 +252,7 @@ namespace TKXDPM_API.Migrations
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("PaymentStatus")
+                        .IsRequired()
                         .HasColumnType("varchar(255)");
 
                     b.Property<int>("RentalId")
@@ -244,9 +260,17 @@ namespace TKXDPM_API.Migrations
 
                     b.HasKey("TransactionId");
 
-                    b.HasIndex("RentalId");
+                    b.HasIndex("RentalId")
+                        .IsUnique();
 
                     b.ToTable("Transactions");
+                });
+
+            modelBuilder.Entity("TKXDPM_API.Model.Bike", b =>
+                {
+                    b.HasOne("TKXDPM_API.Model.Station", null)
+                        .WithMany("ListBike")
+                        .HasForeignKey("StationId");
                 });
 
             modelBuilder.Entity("TKXDPM_API.Model.BikeInStation", b =>
@@ -272,7 +296,9 @@ namespace TKXDPM_API.Migrations
                 {
                     b.HasOne("TKXDPM_API.Model.Renter", "Renter")
                         .WithMany()
-                        .HasForeignKey("RenterId");
+                        .HasForeignKey("RenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Renter");
                 });
@@ -280,7 +306,7 @@ namespace TKXDPM_API.Migrations
             modelBuilder.Entity("TKXDPM_API.Model.Rental", b =>
                 {
                     b.HasOne("TKXDPM_API.Model.Bike", "Bike")
-                        .WithMany()
+                        .WithMany("Rentals")
                         .HasForeignKey("BikeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -292,8 +318,10 @@ namespace TKXDPM_API.Migrations
                         .IsRequired();
 
                     b.HasOne("TKXDPM_API.Model.Renter", "Renter")
-                        .WithMany()
-                        .HasForeignKey("RenterId");
+                        .WithOne("Rental")
+                        .HasForeignKey("TKXDPM_API.Model.Rental", "RenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Bike");
 
@@ -316,12 +344,32 @@ namespace TKXDPM_API.Migrations
             modelBuilder.Entity("TKXDPM_API.Model.Transaction", b =>
                 {
                     b.HasOne("TKXDPM_API.Model.Rental", "Rental")
-                        .WithMany()
-                        .HasForeignKey("RentalId")
+                        .WithOne("Transaction")
+                        .HasForeignKey("TKXDPM_API.Model.Transaction", "RentalId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Rental");
+                });
+
+            modelBuilder.Entity("TKXDPM_API.Model.Bike", b =>
+                {
+                    b.Navigation("Rentals");
+                });
+
+            modelBuilder.Entity("TKXDPM_API.Model.Rental", b =>
+                {
+                    b.Navigation("Transaction");
+                });
+
+            modelBuilder.Entity("TKXDPM_API.Model.Renter", b =>
+                {
+                    b.Navigation("Rental");
+                });
+
+            modelBuilder.Entity("TKXDPM_API.Model.Station", b =>
+                {
+                    b.Navigation("ListBike");
                 });
 #pragma warning restore 612, 618
         }

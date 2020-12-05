@@ -24,48 +24,13 @@ namespace TKXDPM_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Bikes",
-                columns: table => new
-                {
-                    BikeId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    BikeName = table.Column<string>(type: "varchar(255)", nullable: true),
-                    Description = table.Column<string>(type: "varchar(255)", nullable: true),
-                    StartingRent = table.Column<int>(type: "integer", nullable: false),
-                    HourlyRent = table.Column<int>(type: "integer", nullable: false),
-                    Type = table.Column<int>(type: "integer", nullable: false),
-                    LicensePlates = table.Column<string>(type: "varchar(255)", nullable: true),
-                    BatterCapacity = table.Column<int>(type: "integer", nullable: false),
-                    PowerDrain = table.Column<float>(type: "real", nullable: false),
-                    Deposit = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Bikes", x => x.BikeId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Cards",
-                columns: table => new
-                {
-                    CardId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RenterId = table.Column<int>(type: "integer", nullable: false),
-                    PaymentMethod = table.Column<string>(type: "varchar(255)", nullable: true),
-                    Cvv = table.Column<int>(type: "integer", nullable: false),
-                    ExpirationDate = table.Column<string>(type: "varchar(255)", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cards", x => x.CardId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Renters",
                 columns: table => new
                 {
-                    RenterId = table.Column<string>(type: "varchar(255)", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: true)
+                    RenterId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "varchar(255)", nullable: true),
+                    DeviceCode = table.Column<string>(type: "varchar(255)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -78,6 +43,7 @@ namespace TKXDPM_API.Migrations
                 {
                     StationId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    StationName = table.Column<string>(type: "text", nullable: true),
                     AddressId = table.Column<int>(type: "integer", nullable: false),
                     ContactName = table.Column<string>(type: "varchar(255)", nullable: true),
                     Email = table.Column<string>(type: "varchar(255)", nullable: true),
@@ -96,37 +62,52 @@ namespace TKXDPM_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Rentals",
+                name: "Cards",
                 columns: table => new
                 {
-                    RentalId = table.Column<int>(type: "integer", nullable: false)
+                    CardId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    BikeId = table.Column<int>(type: "integer", nullable: false),
-                    CardId = table.Column<int>(type: "integer", nullable: false),
-                    RenterId = table.Column<string>(type: "varchar(255)", nullable: true),
-                    RateContent = table.Column<string>(type: "varchar(255)", nullable: true),
-                    RateNumber = table.Column<int>(type: "integer", nullable: false)
+                    RenterId = table.Column<int>(type: "integer", nullable: false),
+                    PaymentMethod = table.Column<string>(type: "varchar(255)", nullable: true),
+                    Cvv = table.Column<int>(type: "integer", nullable: false),
+                    ExpirationDate = table.Column<string>(type: "varchar(255)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rentals", x => x.RentalId);
+                    table.PrimaryKey("PK_Cards", x => x.CardId);
                     table.ForeignKey(
-                        name: "FK_Rentals_Bikes_BikeId",
-                        column: x => x.BikeId,
-                        principalTable: "Bikes",
-                        principalColumn: "BikeId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Rentals_Cards_CardId",
-                        column: x => x.CardId,
-                        principalTable: "Cards",
-                        principalColumn: "CardId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Rentals_Renters_RenterId",
+                        name: "FK_Cards_Renters_RenterId",
                         column: x => x.RenterId,
                         principalTable: "Renters",
                         principalColumn: "RenterId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Bikes",
+                columns: table => new
+                {
+                    BikeId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    BikeName = table.Column<string>(type: "varchar(255)", nullable: true),
+                    Description = table.Column<string>(type: "varchar(255)", nullable: true),
+                    StartingRent = table.Column<int>(type: "integer", nullable: false),
+                    HourlyRent = table.Column<int>(type: "integer", nullable: false),
+                    Type = table.Column<int>(type: "integer", nullable: false),
+                    LicensePlates = table.Column<string>(type: "varchar(255)", nullable: true),
+                    BatterCapacity = table.Column<int>(type: "integer", nullable: false),
+                    PowerDrain = table.Column<float>(type: "real", nullable: false),
+                    Deposit = table.Column<int>(type: "integer", nullable: false),
+                    StationId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Bikes", x => x.BikeId);
+                    table.ForeignKey(
+                        name: "FK_Bikes_Stations_StationId",
+                        column: x => x.StationId,
+                        principalTable: "Stations",
+                        principalColumn: "StationId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -157,13 +138,48 @@ namespace TKXDPM_API.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Rentals",
+                columns: table => new
+                {
+                    RentalId = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RateContent = table.Column<string>(type: "varchar(255)", nullable: true),
+                    RateNumber = table.Column<int>(type: "integer", nullable: false),
+                    BikeId = table.Column<int>(type: "integer", nullable: false),
+                    CardId = table.Column<int>(type: "integer", nullable: false),
+                    RenterId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Rentals", x => x.RentalId);
+                    table.ForeignKey(
+                        name: "FK_Rentals_Bikes_BikeId",
+                        column: x => x.BikeId,
+                        principalTable: "Bikes",
+                        principalColumn: "BikeId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Rentals_Cards_CardId",
+                        column: x => x.CardId,
+                        principalTable: "Cards",
+                        principalColumn: "CardId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Rentals_Renters_RenterId",
+                        column: x => x.RenterId,
+                        principalTable: "Renters",
+                        principalColumn: "RenterId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Transactions",
                 columns: table => new
                 {
                     TransactionId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RentalId = table.Column<int>(type: "integer", nullable: false),
-                    PaymentStatus = table.Column<string>(type: "varchar(255)", nullable: true),
+                    PaymentStatus = table.Column<string>(type: "varchar(255)", nullable: false),
                     BookedStartDateTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     BookedEndDateTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     ActualStartDateTime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
@@ -195,6 +211,16 @@ namespace TKXDPM_API.Migrations
                 column: "StationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Bikes_StationId",
+                table: "Bikes",
+                column: "StationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Cards_RenterId",
+                table: "Cards",
+                column: "RenterId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rentals_BikeId",
                 table: "Rentals",
                 column: "BikeId");
@@ -207,7 +233,8 @@ namespace TKXDPM_API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_RenterId",
                 table: "Rentals",
-                column: "RenterId");
+                column: "RenterId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stations_AddressId",
@@ -217,7 +244,8 @@ namespace TKXDPM_API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_RentalId",
                 table: "Transactions",
-                column: "RentalId");
+                column: "RentalId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -229,13 +257,7 @@ namespace TKXDPM_API.Migrations
                 name: "Transactions");
 
             migrationBuilder.DropTable(
-                name: "Stations");
-
-            migrationBuilder.DropTable(
                 name: "Rentals");
-
-            migrationBuilder.DropTable(
-                name: "Addresses");
 
             migrationBuilder.DropTable(
                 name: "Bikes");
@@ -244,7 +266,13 @@ namespace TKXDPM_API.Migrations
                 name: "Cards");
 
             migrationBuilder.DropTable(
+                name: "Stations");
+
+            migrationBuilder.DropTable(
                 name: "Renters");
+
+            migrationBuilder.DropTable(
+                name: "Addresses");
         }
     }
 }

@@ -7,7 +7,6 @@ namespace TKXDPM_API.Model
     public class Card
     {
         [Key] public int CardId { get; set; }
-        [Column(TypeName = "varchar(255)")]
         public int RenterId { get; set; }
         public Renter Renter { get; set; }
         [Column(TypeName = "varchar(255)")]
