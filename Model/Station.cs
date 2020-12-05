@@ -8,6 +8,7 @@ namespace TKXDPM_API.Model
     {
         [Key] public int StationId { get; set; }
 
+        public string StationName { get; set; }
         public int AddressId { get; set; }
         public Address Address { get; set; }
         [Column(TypeName = "varchar(255)")] public string ContactName { get; set; }
@@ -24,6 +25,7 @@ namespace TKXDPM_API.Model
         {
             StationId = 1;
             AddressId = 1;
+            StationName = "StationName";
             ContactName = "ContactName";
             Email = "Email";
             Phone = "Phone";
@@ -34,11 +36,12 @@ namespace TKXDPM_API.Model
                 new BikeResponse(),
                 new BikeResponse()
             };
-            Area = 10;
+            Area = 10.5F;
         }
         
         public int StationId { get; set; }
         public int AddressId { get; set; }
+        public string StationName { get; set; }
         public string ContactName { get; set; }
         public string Email { get; set; } 
         public string Phone { get; set; }
