@@ -15,7 +15,16 @@ namespace TKXDPM_API
             modelBuilder.Entity<BikeInStation>()
                 .HasKey(key => new {key.BikeId, key.StationId});
             
+            modelBuilder.Entity<Transaction>()
+                .HasKey(key => new {key.TransactionId, key.RentalId});
+            
             modelBuilder.Entity<Address>().HasData(Address.GetSeederData());
+            modelBuilder.Entity<Bike>().HasData(Bike.GetSeederData());
+            modelBuilder.Entity<Station>().HasData(Station.GetSeederData());
+            modelBuilder.Entity<Card>().HasData(Card.GetSeederData());
+            modelBuilder.Entity<Renter>().HasData(Renter.GetSeederData());
+            modelBuilder.Entity<Rental>().HasData(Rental.GetSeederData());
+
         }
 
         public DbSet<Address> Addresses { get; set; }
