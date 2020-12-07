@@ -27,10 +27,10 @@ namespace TKXDPM_API.Controllers
         }
 
         [HttpGet("get-list-stations")]
-        public async Task<ActionResult> GetListStations()
+        public async Task<ActionResult<List<StationResponse>>> GetListStations()
         {
             var listStation = await _dbContext.Stations
-                .Include(station => station.BikeInStations).ThenInclude(bikeInStation =>  bikeInStation.Bike )
+                .Include(station => station.BikeInStations).ThenInclude(bikeInStation => bikeInStation.Bike)
                 .Include(station => station.Address)
                 .ToListAsync();
             var listStationResponse = new List<StationResponse>();
@@ -47,27 +47,57 @@ namespace TKXDPM_API.Controllers
                 stationResponse.ListBike = listBike;
                 listStationResponse.Add(stationResponse);
             }
-            return Ok(listStationResponse);
+
+            return listStationResponse;
         }
 
         [HttpGet("get-station")]
-        public async Task<ActionResult> GetStation(int id)
+        public async Task<ActionResult<StationResponse>> GetStation(int id)
         {
-            return Ok(new StationResponse());
+            var stations = await _dbContext.Stations.Where(s => s.StationId == id)
+                .Include(s => s.BikeInStations).ThenInclude(bikeInStation => bikeInStation.Bike)
+                .Include(s => s.Address)
+                .ToListAsync();
+            if (stations.Count == 0)
+            {
+                return NotFound($"Not found station {id}");
+            }
+
+            var stationR = stations[0];
+            var stationResponse = _mapper.Map<StationResponse>(stationR);
+            stationResponse.Address = _mapper.Map<AddressResponse>(stationR.Address);
+            var listBike = new List<BikeResponse>();
+            foreach (var bikeInStation in stationR.BikeInStations)
+            {
+                listBike.Add(_mapper.Map<BikeResponse>(bikeInStation.Bike));
+            }
+
+            stationResponse.ListBike = listBike;
+            return stationResponse;
         }
 
         [HttpGet("get-list-bike")]
-        public async Task<ActionResult> GetListBike(int stationId, BikeType type)
+        public async Task<ActionResult<List<BikeResponse>>> GetListBike(int stationId, BikeType type)
         {
-            return Ok(new List<BikeResponse>
+            var stations = await _dbContext.Stations.Where(s => s.StationId == stationId)
+                .Include(s => s.BikeInStations)
+                .ThenInclude(bikeInStation => bikeInStation.Bike)
+                .Include(s => s.Address)
+                .ToListAsync();
+            if (stations.Count == 0)
             {
-                new BikeResponse(),
-                new BikeResponse(),
-                new BikeResponse(),
-                new BikeResponse(),
-                new BikeResponse(),
-                new BikeResponse()
-            });
+                return NotFound($"Not found station {stationId}");
+            }
+
+            var listBike = (
+                    from bikeInStation in stations[0].BikeInStations
+                    select bikeInStation.Bike
+                    into bike
+                    where bike.Type == type
+                    select _mapper.Map<BikeResponse>(bike))
+                .ToList();
+
+            return listBike;
         }
 
         [HttpGet("get-bike")]
@@ -88,7 +118,7 @@ namespace TKXDPM_API.Controllers
         public async Task<ActionResult> GetCard(string deviceCode)
         {
             var renter = await _dbContext.FindRenter(deviceCode);
-            
+
             return Ok(new CardResponse());
         }
 
