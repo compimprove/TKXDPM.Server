@@ -10,7 +10,7 @@ namespace TKXDPM_API.Model
     {
         [Key] public int BikeId { get; set; }
         [Column(TypeName = "varchar(255)")] public string BikeName { get; set; }
-        [Column(TypeName = "varchar(255)")] public string Description { get; set; }
+        public string Description { get; set; }
         public int Size { get; set; }
         public int StartingRent { get; set; }
         public int HourlyRent { get; set; }

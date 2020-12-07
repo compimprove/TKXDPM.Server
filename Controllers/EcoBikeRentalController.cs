@@ -29,12 +29,25 @@ namespace TKXDPM_API.Controllers
         [HttpGet("get-list-stations")]
         public async Task<ActionResult> GetListStations()
         {
-            var listStation = new List<StationResponse>
+            var listStation = await _dbContext.Stations
+                .Include(station => station.BikeInStations).ThenInclude(bikeInStation =>  bikeInStation.Bike )
+                .Include(station => station.Address)
+                .ToListAsync();
+            var listStationResponse = new List<StationResponse>();
+            foreach (var station in listStation)
             {
-                new StationResponse(),
-                new StationResponse()
-            };
-            return Ok(listStation);
+                var stationResponse = _mapper.Map<StationResponse>(station);
+                stationResponse.Address = _mapper.Map<AddressResponse>(station.Address);
+                var listBike = new List<BikeResponse>();
+                foreach (var bikeInStation in station.BikeInStations)
+                {
+                    listBike.Add(_mapper.Map<BikeResponse>(bikeInStation.Bike));
+                }
+
+                stationResponse.ListBike = listBike;
+                listStationResponse.Add(stationResponse);
+            }
+            return Ok(listStationResponse);
         }
 
         [HttpGet("get-station")]
@@ -58,14 +71,24 @@ namespace TKXDPM_API.Controllers
         }
 
         [HttpGet("get-bike")]
-        public async Task<ActionResult> GetBike(int bikeId)
+        public async Task<ActionResult<BikeResponse>> GetBike(int bikeId)
         {
-            return Ok(new BikeResponse());
+            var bike = await _dbContext.Bikes.FindAsync(bikeId);
+            if (bike != null)
+            {
+                return _mapper.Map<BikeResponse>(bike);
+            }
+            else
+            {
+                return NotFound($"Not found bike {bikeId}");
+            }
         }
 
         [HttpGet("get-payment-method")]
         public async Task<ActionResult> GetCard(string deviceCode)
         {
+            var renter = await _dbContext.FindRenter(deviceCode);
+            
             return Ok(new CardResponse());
         }
 
@@ -105,7 +128,7 @@ namespace TKXDPM_API.Controllers
             }
 
             var bikeInStations
-                = from bikeInStation in _dbContext.BikeInStation
+                = from bikeInStation in _dbContext.BikeInStations
                 where bikeInStation.BikeId == bikeId
                 select bikeInStation;
             _dbContext.RemoveRange(bikeInStations);
@@ -117,7 +140,7 @@ namespace TKXDPM_API.Controllers
             var transaction = new Transaction()
             {
                 Rental = newRental,
-                PaymentStatus = false,
+                PaymentStatus = PaymentStatus.Deposit,
                 BookedStartDateTime = DateTime.Now
             };
             _dbContext.Add(newRental);
@@ -175,7 +198,7 @@ namespace TKXDPM_API.Controllers
         private async Task<bool> BikeInStation(int bikeId, int stationId)
         {
             var bikeInStations
-                = await (from bikeInStation in _dbContext.BikeInStation
+                = await (from bikeInStation in _dbContext.BikeInStations
                     where bikeInStation.BikeId == bikeId
                           && bikeInStation.StationId == stationId
                     select bikeInStation).ToListAsync();

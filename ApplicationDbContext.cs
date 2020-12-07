@@ -17,26 +17,23 @@ namespace TKXDPM_API
         {
             modelBuilder.Entity<BikeInStation>()
                 .HasKey(key => new {key.BikeId, key.StationId});
-            
-            modelBuilder.Entity<Transaction>()
-                .HasKey(key => new {key.TransactionId, key.RentalId});
-            
             modelBuilder.Entity<Address>().HasData(Address.GetSeederData());
-            modelBuilder.Entity<Bike>().HasData(Bike.GetSeederData());
             modelBuilder.Entity<Station>().HasData(Station.GetSeederData());
-            modelBuilder.Entity<Card>().HasData(Card.GetSeederData());
+            modelBuilder.Entity<Bike>().HasData(Bike.GetSeederData());
+            modelBuilder.Entity<BikeInStation>().HasData(BikeInStation.GetSeederData());
             modelBuilder.Entity<Renter>().HasData(Renter.GetSeederData());
+            modelBuilder.Entity<Card>().HasData(Card.GetSeederData());
             modelBuilder.Entity<Rental>().HasData(Rental.GetSeederData());
-
+            modelBuilder.Entity<Transaction>().HasData(Transaction.GetSeederData());
         }
 
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Station> Stations { get; set; }
         public DbSet<Bike> Bikes { get; set; }
-        public DbSet<BikeInStation> BikeInStation { get; set; }
+        public DbSet<BikeInStation> BikeInStations { get; set; }
+        public DbSet<Renter> Renters { get; set; }
         public DbSet<Card> Cards { get; set; }
         public DbSet<Rental> Rentals { get; set; }
-        public DbSet<Renter> Renters { get; set; }
-        public DbSet<Station> Stations { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 
         public async Task<Renter> FindRenter(string deviceCode)
