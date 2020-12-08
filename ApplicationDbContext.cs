@@ -38,8 +38,8 @@ namespace TKXDPM_API
 
         public async Task<Renter> FindRenter(string deviceCode)
         {
-            var renters = await Renters.Where(renter => renter.DeviceCode == deviceCode).ToListAsync();
-            return renters.Count == 0 ? null : renters[0];
+            var renter = await Renters.Where(r => r.DeviceCode == deviceCode).FirstOrDefaultAsync();
+            return renter;
         }
     }
 }

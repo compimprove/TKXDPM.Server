@@ -8,9 +8,13 @@ namespace TKXDPM_API.Helpers
         public AutoMapperProfile()
         {
             CreateMap<CardRequest, Card>();
+            CreateMap<Card, CardResponse>();
             CreateMap<Station, StationResponse>();
             CreateMap<Address, AddressResponse>();
             CreateMap<Bike, BikeResponse>();
+            CreateMap<Renter, RenterResponse>();
+            CreateMap<Rental, RentalResponse>();
+            CreateMap<Transaction, TransactionResponse>();
         }
     }
 }

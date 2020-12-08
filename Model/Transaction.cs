@@ -58,19 +58,8 @@ namespace TKXDPM_API.Model
 
     public class TransactionResponse
     {
-        public TransactionResponse()
-        {
-            TransactionId = 1;
-            PaymentStatus = false;
-            BookedStartDateTime = new DateTime(2020, 10, 20).ToShortDateString();
-            BookedEndDateTime = BookedStartDateTime;
-            ActualStartDateTime = BookedStartDateTime;
-            ActualEndDateTime = BookedStartDateTime;
-        }
-
         [Key] public int TransactionId { get; set; }
-        public Rental Rental { get; set; }
-        [Column(TypeName = "varchar(255)")] public bool PaymentStatus { get; set; }
+        public PaymentStatus PaymentStatus { get; set; }
         public string BookedStartDateTime { get; set; }
         public string BookedEndDateTime { get; set; }
         public string ActualStartDateTime { get; set; }

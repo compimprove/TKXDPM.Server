@@ -15,6 +15,7 @@ namespace TKXDPM_API.Model
         public int RenterId { get; set; }
         public Renter Renter { get; set; }
         [Column(TypeName = "varchar(255)")] public string RateContent { get; set; }
+        public Transaction Transaction { get; set; }
         public int RateNumber { get; set; }
 
         public static List<Rental> GetSeederData()
@@ -54,22 +55,11 @@ namespace TKXDPM_API.Model
             };
         }
 
-        public Transaction Transaction { get; set; }
+       
     }
 
     public class RentalResponse
     {
-        public RentalResponse()
-        {
-            Renter = new RenterResponse();
-            Bike = new BikeResponse();
-            Card = new CardResponse();
-            Transaction = new TransactionResponse();
-            RateContent = "Good";
-            RateNumber = 5;
-        }
-
-        public RenterResponse Renter { get; set; }
         public BikeResponse Bike { get; set; }
         public CardResponse Card { get; set; }
         public TransactionResponse Transaction { get; set; }

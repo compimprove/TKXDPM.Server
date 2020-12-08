@@ -336,7 +336,6 @@ namespace TKXDPM_API.Model
         public int BatterCapacity { get; set; }
         public float PowerDrain { get; set; }
         public int Deposit { get; set; }
-        public List<RentalResponse> Rentals { get; set; }
     }
 
     public enum BikeType
