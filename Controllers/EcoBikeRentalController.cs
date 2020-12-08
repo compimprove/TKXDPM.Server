@@ -132,18 +132,28 @@ namespace TKXDPM_API.Controllers
         public async Task<ActionResult<RentalResponse>> GetRentalInfoBikeById(string deviceCode)
         {
             var renter = await _dbContext.FindRenter(deviceCode);
+            if (renter == null)
+            {
+                return NotFound($"Not found renter {deviceCode}");
+            }
+
             var rental = await _dbContext.Rentals
                 .Where(r => r.RenterId == renter.RenterId)
                 .Include(r => r.Card)
                 .Include(r => r.Bike)
                 .Include(r => r.Transaction).FirstOrDefaultAsync();
+            if (rental == null)
+            {
+                return NotFound($"Not found rental with renter {deviceCode}");
+            }
+
             var rentalResponse = _mapper.Map<RentalResponse>(rental);
-            
+
             return Ok(rentalResponse);
         }
 
         [HttpPost("add-payment-method")]
-        public async Task<ActionResult> AddPaymentMethod([FromBody] CardRequest request)
+        public async Task<ActionResult> AddPaymentMethod(string deviceCode, [FromBody] CardRequest request)
         {
             var card = _mapper.Map<Card>(request);
             _dbContext.Cards.Add(card);
@@ -204,8 +214,13 @@ namespace TKXDPM_API.Controllers
             return hasRent;
         }
 
+        public struct ReturnBikeResponse
+        {
+            public int ReturnMoney { get; set; }
+        }
+
         [HttpPost("return-bike")]
-        public async Task<ActionResult> ReturnBike(int stationId, int bikeId)
+        public async Task<ActionResult<ReturnBikeResponse>> ReturnBike(string deviceCode, int stationId, int bikeId)
         {
             var bikeInStation = await BikeInStation(bikeId, stationId);
             if (bikeInStation)
@@ -233,10 +248,10 @@ namespace TKXDPM_API.Controllers
             };
             _dbContext.Add(bikeStation);
             await _dbContext.SaveChangesAsync();
-            return Ok(new
+            return new ReturnBikeResponse()
             {
-                returnMoney = 100000
-            });
+                ReturnMoney = 100000
+            };
         }
 
         private async Task<bool> BikeInStation(int bikeId, int stationId)
