@@ -129,7 +129,7 @@ namespace TKXDPM_API.Controllers
         }
 
         [HttpGet("get-rental-info")]
-        public async Task<ActionResult> GetRentalInfoBikeById(string deviceCode)
+        public async Task<ActionResult<RentalResponse>> GetRentalInfoBikeById(string deviceCode)
         {
             var renter = await _dbContext.FindRenter(deviceCode);
             var rental = await _dbContext.Rentals
