@@ -205,7 +205,7 @@ namespace TKXDPM_API.Controllers
             await RentBike(bike, renter);
             return Ok();
         }
-
+        [NonAction]
         public async Task<bool> HasRentBike(int userId, int bikeId)
         {
             var oldRentals = await (from rental in _dbContext.Rentals
@@ -264,7 +264,7 @@ namespace TKXDPM_API.Controllers
                 ReturnMoney = fee
             };
         }
-
+        [NonAction]
         private async Task<bool> BikeInStation(int bikeId, int stationId)
         {
             var bikeInStations
@@ -274,7 +274,7 @@ namespace TKXDPM_API.Controllers
                     select bikeInStation).ToListAsync();
             return bikeInStations.Count != 0;
         }
-
+        [NonAction]
         public async Task RentBike(Bike bike, Renter renter)
         {
             var bikeInStations
@@ -297,7 +297,7 @@ namespace TKXDPM_API.Controllers
             _dbContext.Add(transaction);
             await _dbContext.SaveChangesAsync();
         }
-
+        [NonAction]
         public int CalculateFee(double minutes, BikeType type)
         {
             double fee = 0;
