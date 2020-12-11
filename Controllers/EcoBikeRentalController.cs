@@ -152,10 +152,32 @@ namespace TKXDPM_API.Controllers
             return Ok(rentalResponse);
         }
 
-        [HttpPost("add-payment-method")]
-        public async Task<ActionResult> AddPaymentMethod(string deviceCode, [FromBody] CardRequest request)
+        public class AddPaymentMethodForm
         {
-            var card = _mapper.Map<Card>(request);
+            public string DeviceCode { get; set; }
+            public string CardCode { get; set; }
+            public string PaymentMethod { get; set; }
+            public int Cvv { get; set; }
+            public DateTime ExpirationDate { get; set; }
+        }
+
+        [HttpPost("add-payment-method")]
+        public async Task<ActionResult> AddPaymentMethod([FromBody] AddPaymentMethodForm request)
+        {
+            var renter = await _dbContext.FindRenter(request.DeviceCode);
+            if (renter == null)
+            {
+                return NotFound($"Not found renter {request.DeviceCode}");
+            }
+
+            var card = new Card()
+            {
+                RenterId = renter.RenterId,
+                CardCode = request.CardCode,
+                PaymentMethod = request.PaymentMethod,
+                Cvv = request.Cvv,
+                ExpirationDate = request.ExpirationDate
+            };
             _dbContext.Cards.Add(card);
             await _dbContext.SaveChangesAsync();
             return Ok();
@@ -181,29 +203,11 @@ namespace TKXDPM_API.Controllers
                 return BadRequest($"UserID {renter.RenterId} has rent another bike");
             }
 
-            var bikeInStations
-                = from bikeInStation in _dbContext.BikeInStations
-                where bikeInStation.BikeId == bikeId
-                select bikeInStation;
-            _dbContext.RemoveRange(bikeInStations);
-            var newRental = new Rental()
-            {
-                Bike = bike,
-                Renter = renter
-            };
-            var transaction = new Transaction()
-            {
-                Rental = newRental,
-                PaymentStatus = PaymentStatus.Deposit,
-                BookedStartDateTime = DateTime.Now
-            };
-            _dbContext.Add(newRental);
-            _dbContext.Add(transaction);
-            await _dbContext.SaveChangesAsync();
+            await RentBike(bike, renter);
             return Ok();
         }
 
-        private async Task<bool> HasRentBike(int userId, int bikeId)
+        public async Task<bool> HasRentBike(int userId, int bikeId)
         {
             var oldRentals = await (from rental in _dbContext.Rentals
                 where rental.BikeId == bikeId && rental.RenterId == userId
@@ -248,9 +252,17 @@ namespace TKXDPM_API.Controllers
             };
             _dbContext.Add(bikeStation);
             await _dbContext.SaveChangesAsync();
+
+            var renter = await _dbContext.FindRenter(deviceCode);
+            var transaction = renter.Rental.Transaction;
+            var totalMinutes = (bikeStation.DateTimeIn - transaction.BookedStartDateTime).TotalMinutes;
+            var fee = CalculateFee(totalMinutes, bike.Type);
+
+            transaction.BookedEndDateTime = bikeStation.DateTimeIn;
+
             return new ReturnBikeResponse()
             {
-                ReturnMoney = 100000
+                ReturnMoney = fee
             };
         }
 
@@ -263,5 +275,62 @@ namespace TKXDPM_API.Controllers
                     select bikeInStation).ToListAsync();
             return bikeInStations.Count != 0;
         }
+
+        public async Task RentBike(Bike bike, Renter renter)
+        {
+            var bikeInStations
+                = from bikeInStation in _dbContext.BikeInStations
+                where bikeInStation.BikeId == bike.BikeId
+                select bikeInStation;
+            _dbContext.RemoveRange(bikeInStations);
+            var newRental = new Rental()
+            {
+                Bike = bike,
+                Renter = renter
+            };
+            var transaction = new Transaction()
+            {
+                Rental = newRental,
+                PaymentStatus = PaymentStatus.Deposit,
+                BookedStartDateTime = DateTime.Now
+            };
+            _dbContext.Add(newRental);
+            _dbContext.Add(transaction);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public int CalculateFee(double minutes, BikeType type)
+        {
+            double fee = 0;
+            if (minutes < 10)
+            {
+                fee = 0;
+            }
+            else if (minutes <= 30)
+            {
+                fee = 10;
+            }
+            else
+            {
+                fee = Math.Ceiling((minutes - 30) / 15) * 3 + 10;
+            }
+
+            switch (type)
+            {
+                case BikeType.Single:
+                    return (int) fee * 1000;
+                case BikeType.Double:
+                case BikeType.Electric:
+                    return (int) (fee * 1000 * 1.5);
+                default:
+                    return 0;
+            }
+        }
+    }
+
+    public static class CustomDateTime
+    {
+        public static TimeSpan TimespanOffset { get; set; } = new TimeSpan(0);
+        public static DateTime Now => DateTime.Now + TimespanOffset;
     }
 }

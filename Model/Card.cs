@@ -56,6 +56,7 @@ namespace TKXDPM_API.Model
     public class CardRequest
     {
         public int RenterId { get; set; }
+        public string CardCode { get; set; }
         public string PaymentMethod { get; set; }
         public int Cvv { get; set; }
         public DateTime ExpirationDate { get; set; }
