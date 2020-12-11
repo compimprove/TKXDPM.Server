@@ -11,7 +11,6 @@ using TKXDPM_API.Model;
 namespace TKXDPM_API.Controllers
 {
     [Route("api")]
-    [ApiController]
     public class EcoBikeRentalController : ControllerBase
     {
         private readonly ILogger<EcoBikeRentalController> _logger;

@@ -38,7 +38,6 @@ namespace TKXDPM_API.Model
             };
         }
 
-
         public Rental Rental { get; set; }
         public Card Card { get; set; }
     }
