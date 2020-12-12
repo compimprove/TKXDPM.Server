@@ -10,8 +10,8 @@ using TKXDPM_API;
 namespace TKXDPM_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201207135527_se")]
-    partial class se
+    [Migration("20201212003839_Test")]
+    partial class Test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -120,15 +120,10 @@ namespace TKXDPM_API.Migrations
                     b.Property<int>("StartingRent")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("StationId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("Type")
                         .HasColumnType("integer");
 
                     b.HasKey("BikeId");
-
-                    b.HasIndex("StationId");
 
                     b.ToTable("Bikes");
 
@@ -560,7 +555,8 @@ namespace TKXDPM_API.Migrations
 
                     b.HasKey("CardId");
 
-                    b.HasIndex("RenterId");
+                    b.HasIndex("RenterId")
+                        .IsUnique();
 
                     b.ToTable("Cards");
 
@@ -942,13 +938,6 @@ namespace TKXDPM_API.Migrations
                         });
                 });
 
-            modelBuilder.Entity("TKXDPM_API.Model.Bike", b =>
-                {
-                    b.HasOne("TKXDPM_API.Model.Station", null)
-                        .WithMany("ListBike")
-                        .HasForeignKey("StationId");
-                });
-
             modelBuilder.Entity("TKXDPM_API.Model.BikeInStation", b =>
                 {
                     b.HasOne("TKXDPM_API.Model.Bike", "Bike")
@@ -958,7 +947,7 @@ namespace TKXDPM_API.Migrations
                         .IsRequired();
 
                     b.HasOne("TKXDPM_API.Model.Station", "Station")
-                        .WithMany()
+                        .WithMany("BikeInStations")
                         .HasForeignKey("StationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -971,8 +960,8 @@ namespace TKXDPM_API.Migrations
             modelBuilder.Entity("TKXDPM_API.Model.Card", b =>
                 {
                     b.HasOne("TKXDPM_API.Model.Renter", "Renter")
-                        .WithMany()
-                        .HasForeignKey("RenterId")
+                        .WithOne("Card")
+                        .HasForeignKey("TKXDPM_API.Model.Card", "RenterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1040,12 +1029,14 @@ namespace TKXDPM_API.Migrations
 
             modelBuilder.Entity("TKXDPM_API.Model.Renter", b =>
                 {
+                    b.Navigation("Card");
+
                     b.Navigation("Rental");
                 });
 
             modelBuilder.Entity("TKXDPM_API.Model.Station", b =>
                 {
-                    b.Navigation("ListBike");
+                    b.Navigation("BikeInStations");
                 });
 #pragma warning restore 612, 618
         }

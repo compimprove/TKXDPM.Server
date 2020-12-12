@@ -15,7 +15,7 @@ namespace TKXDPM_API.Model
         [Key] public int RenterId { get; set; }
         [Column(TypeName = "varchar(255)")] public string Name { get; set; }
         [Column(TypeName = "varchar(255)")] public string DeviceCode { get; set; }
-        public Rental Rental { get; set; }
+        public List<Rental> Rentals { get; set; }
         public Card Card { get; set; }
     }
 
