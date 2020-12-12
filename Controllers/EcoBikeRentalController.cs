@@ -205,7 +205,7 @@ namespace TKXDPM_API.Controllers
                 return NotFound($"The BikeId {bikeId} Not Found");
             }
 
-            var hasRent = await HasRentBike(renter.RenterId, bikeId);
+            var hasRent = await HasRentBike(renter.RenterId);
             if (hasRent)
             {
                 return BadRequest($"UserID {renter.RenterId} has rent another bike");
@@ -236,15 +236,16 @@ namespace TKXDPM_API.Controllers
         }
 
         [NonAction]
-        public async Task<bool> HasRentBike(int userId, int bikeId)
+        public async Task<bool> HasRentBike(int userId)
         {
             var oldRentals =
-                await _dbContext.Rentals.Where(r => r.BikeId == bikeId && r.RenterId == userId)
+                await _dbContext.Rentals.Where(r => r.RenterId == userId)
                     .Include(r => r.Transaction)
                     .ToListAsync();
             var hasRent = oldRentals.Any(rental =>
-                rental.Transaction.BookedEndDateTime == DateTime.MinValue ||
-                rental.Transaction.BookedEndDateTime >= DateTime.Now);
+                rental.Transaction != null && (
+                    rental.Transaction.BookedEndDateTime == DateTime.MinValue ||
+                    rental.Transaction.BookedEndDateTime >= DateTime.Now));
             return hasRent;
         }
 
@@ -291,11 +292,17 @@ namespace TKXDPM_API.Controllers
             {
                 return NotFound($"Renter {deviceCode} didn't have a rental");
             }
+
             if (renter.Rentals[^1].Transaction == null)
             {
                 return NotFound($"Renter {deviceCode} didn't have a transaction");
             }
-            
+
+            if (renter.Rentals[^1].BikeId != bikeId)
+            {
+                return BadRequest($"Renter {deviceCode} didn't rent bike {bikeId}");
+            }
+
             var transaction = renter.Rentals[^1].Transaction;
             var totalMinutes = (bikeStation.DateTimeIn - transaction.BookedStartDateTime).TotalMinutes;
             var fee = CalculateFee(totalMinutes, bike.Type);
