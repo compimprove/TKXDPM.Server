@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using TKXDPM_API.Model;
+using TKXDPM_API.Seeder;
 
 namespace TKXDPM_API
 {
@@ -17,14 +18,14 @@ namespace TKXDPM_API
         {
             modelBuilder.Entity<BikeInStation>()
                 .HasKey(key => new {key.BikeId, key.StationId});
-            modelBuilder.Entity<Address>().HasData(Address.GetSeederData());
-            modelBuilder.Entity<Station>().HasData(Station.GetSeederData());
-            modelBuilder.Entity<Bike>().HasData(Bike.GetSeederData());
-            modelBuilder.Entity<BikeInStation>().HasData(BikeInStation.GetSeederData());
-            modelBuilder.Entity<Renter>().HasData(Renter.GetSeederData());
-            modelBuilder.Entity<Card>().HasData(Card.GetSeederData());
-            modelBuilder.Entity<Rental>().HasData(Rental.GetSeederData());
-            modelBuilder.Entity<Transaction>().HasData(Transaction.GetSeederData());
+            modelBuilder.Entity<Address>().HasData(AddressSeeder.GetSeederData());
+            modelBuilder.Entity<Station>().HasData(StationSeeder.GetSeederData());
+            modelBuilder.Entity<Bike>().HasData(BikeSeeder.GetSeederData());
+            modelBuilder.Entity<BikeInStation>().HasData(BikeInStationSeeder.GetSeederData());
+            modelBuilder.Entity<Renter>().HasData(RenterSeeder.GetSeederData());
+            modelBuilder.Entity<Card>().HasData(CardSeeder.GetSeederData());
+            modelBuilder.Entity<Rental>().HasData(RentalSeeder.GetSeederData());
+            modelBuilder.Entity<Transaction>().HasData(TransactionSeeder.GetSeederData());
         }
 
         public DbSet<Address> Addresses { get; set; }

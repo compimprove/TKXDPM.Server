@@ -17,6 +17,13 @@ namespace TKXDPM_API.Controllers
         private readonly IMapper _mapper;
         private readonly ApplicationDbContext _dbContext;
 
+        private readonly Dictionary<BikeType, int> _condition = new Dictionary<BikeType, int>()
+        {
+            {BikeType.Single, 550000},
+            {BikeType.Double, 700000},
+            {BikeType.Electric, 700000}
+        };
+
         public EcoBikeRentalController(ILogger<EcoBikeRentalController> logger, IMapper mapper,
             ApplicationDbContext dbContext)
         {
@@ -183,7 +190,7 @@ namespace TKXDPM_API.Controllers
         }
 
         [HttpPost("rent-bike")]
-        public async Task<ActionResult> RentBike(string deviceCode, int bikeId)
+        public async Task<ActionResult> RentBike(string deviceCode, int bikeId, int deposit)
         {
             var renter = await _dbContext.FindRenter(deviceCode);
             if (renter == null)
@@ -202,9 +209,25 @@ namespace TKXDPM_API.Controllers
                 return BadRequest($"UserID {renter.RenterId} has rent another bike");
             }
 
-            await RentBike(bike, renter);
-            return Ok();
+            if (CheckDeposit(deposit, bike))
+            {
+                await RentBike(bike, renter);
+                return Ok();
+            }
+            else
+            {
+                return BadRequest("Not enough deposit");
+            }
         }
+
+        [NonAction]
+        public bool CheckDeposit(int deposit, Bike bike)
+        {
+            _logger.LogDebug(deposit.ToString());
+            _logger.LogDebug(_condition[bike.Type].ToString());
+            return deposit >= _condition[bike.Type];
+        }
+
         [NonAction]
         public async Task<bool> HasRentBike(int userId, int bikeId)
         {
@@ -264,6 +287,7 @@ namespace TKXDPM_API.Controllers
                 ReturnMoney = fee
             };
         }
+
         [NonAction]
         private async Task<bool> BikeInStation(int bikeId, int stationId)
         {
@@ -274,6 +298,7 @@ namespace TKXDPM_API.Controllers
                     select bikeInStation).ToListAsync();
             return bikeInStations.Count != 0;
         }
+
         [NonAction]
         public async Task RentBike(Bike bike, Renter renter)
         {
@@ -297,6 +322,7 @@ namespace TKXDPM_API.Controllers
             _dbContext.Add(transaction);
             await _dbContext.SaveChangesAsync();
         }
+
         [NonAction]
         public int CalculateFee(double minutes, BikeType type)
         {
