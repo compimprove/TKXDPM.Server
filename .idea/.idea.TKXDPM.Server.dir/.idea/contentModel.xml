@@ -9,15 +9,15 @@
       <e p="Controllers" t="Include">
         <e p="EcoBikeRentalController.cs" t="Include" />
       </e>
+      <e p="ExtensionMethod.cs" t="Include" />
+      <e p="Helpers" t="Include">
+        <e p="AutoMapperProfile.cs" t="Include" />
+      </e>
       <e p="Migrations" t="Include">
-        <e p="20201202105328_First.Designer.cs" t="Include" />
-        <e p="20201202105328_First.cs" t="Include" />
-        <e p="20201202110132_Second.Designer.cs" t="Include" />
-        <e p="20201202110132_Second.cs" t="Include" />
-        <e p="20201203093153_Third.Designer.cs" t="Include" />
-        <e p="20201203093153_Third.cs" t="Include" />
-        <e p="20201203093352_Fourth.Designer.cs" t="Include" />
-        <e p="20201203093352_Fourth.cs" t="Include" />
+        <e p="20201212003839_Test.Designer.cs" t="Include" />
+        <e p="20201212003839_Test.cs" t="Include" />
+        <e p="20201212012338_Test1.Designer.cs" t="Include" />
+        <e p="20201212012338_Test1.cs" t="Include" />
         <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
       </e>
       <e p="Model" t="Include">
@@ -34,9 +34,18 @@
       <e p="Properties" t="Include">
         <e p="launchSettings.json" t="Include" />
       </e>
+      <e p="Seeder" t="Include">
+        <e p="AddressSeeder.cs" t="Include" />
+        <e p="BikeInStationSeeder.cs" t="Include" />
+        <e p="BikeSeeder.cs" t="Include" />
+        <e p="CardSeeder.cs" t="Include" />
+        <e p="RentalSeeder.cs" t="Include" />
+        <e p="RenterSeeder.cs" t="Include" />
+        <e p="StationSeeder.cs" t="Include" />
+        <e p="TransactionSeeder.cs" t="Include" />
+      </e>
       <e p="Startup.cs" t="Include" />
       <e p="TKXDPM_API.csproj" t="IncludeRecursive" />
-      <e p="Test.cs" t="Include" />
       <e p="appsettings.Development.json" t="Include" />
       <e p="appsettings.json" t="Include" />
       <e p="bin" t="ExcludeRecursive" />

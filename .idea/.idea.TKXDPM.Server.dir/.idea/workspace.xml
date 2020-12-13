@@ -5,13 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="076ea576-e12e-49af-82de-dcd6f1d273eb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Model/Address.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Address.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TKXDPM.Server.dir/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TKXDPM.Server.dir/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.TKXDPM.Server.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TKXDPM.Server.dir/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Bike.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Bike.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/BikeInStation.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Model/BikeInStation.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Card.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Card.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Rental.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Rental.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Renter.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Renter.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Model/Station.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Station.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Seeder/BikeSeeder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Seeder/BikeSeeder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Seeder/StationSeeder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Seeder/StationSeeder.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,31 +22,29 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Migrations/ApplicationDbContextModelSnapshot.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Test.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Migrations/20201202110132_Second.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Migrations/20201203093153_Third.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Model/Card.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Model/Bike.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Startup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Model/BikeInStation.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Model/Address.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Migrations/20201202105328_First.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Test.cs" />
         <option value="$PROJECT_DIR$/Model/Address.cs" />
-        <option value="$PROJECT_DIR$/Model/Station.cs" />
         <option value="$PROJECT_DIR$/Model/BikeInStation.cs" />
-        <option value="$PROJECT_DIR$/Model/Bike.cs" />
         <option value="$PROJECT_DIR$/Model/Renter.cs" />
         <option value="$PROJECT_DIR$/Model/Card.cs" />
         <option value="$PROJECT_DIR$/Model/Rental.cs" />
         <option value="$PROJECT_DIR$/Model/Transaction.cs" />
         <option value="$PROJECT_DIR$/ApplicationDbContext.cs" />
+        <option value="$PROJECT_DIR$/Model/Bike.cs" />
+        <option value="$PROJECT_DIR$/Model/Station.cs" />
+        <option value="$PROJECT_DIR$/Seeder/BikeSeeder.cs" />
+        <option value="$PROJECT_DIR$/Seeder/StationSeeder.cs" />
       </list>
     </option>
   </component>
@@ -126,6 +123,7 @@
       <workItem from="1607011486329" duration="1466000" />
       <workItem from="1607093242668" duration="6661000" />
       <workItem from="1607139490265" duration="8511000" />
+      <workItem from="1607867528163" duration="2644000" />
     </task>
     <servers />
   </component>
