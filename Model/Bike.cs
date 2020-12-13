@@ -7,10 +7,10 @@ using System.Linq;
 namespace TKXDPM_API.Model
 {
     public class Bike
-    {
+    {    
         [Key] public int BikeId { get; set; }
         [Column(TypeName = "varchar(255)")] public string BikeName { get; set; }
-        [Column(TypeName = "varchar(512)")]public string BikeImage { get; set; }
+        [Column(TypeName = "varchar(512)")] public string BikeImage { get; set; }
         public string Description { get; set; }
         public int Size { get; set; }
         public int StartingRent { get; set; }

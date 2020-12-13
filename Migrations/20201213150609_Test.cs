@@ -30,6 +30,7 @@ namespace TKXDPM_API.Migrations
                     BikeId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     BikeName = table.Column<string>(type: "varchar(255)", nullable: true),
+                    BikeImage = table.Column<string>(type: "varchar(512)", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     Size = table.Column<int>(type: "integer", nullable: false),
                     StartingRent = table.Column<int>(type: "integer", nullable: false),
@@ -65,7 +66,8 @@ namespace TKXDPM_API.Migrations
                 {
                     StationId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    StationName = table.Column<string>(type: "text", nullable: true),
+                    StationName = table.Column<string>(type: "varchar(255)", nullable: true),
+                    StationImage = table.Column<string>(type: "varchar(512)", nullable: true),
                     AddressId = table.Column<int>(type: "integer", nullable: false),
                     ContactName = table.Column<string>(type: "varchar(255)", nullable: true),
                     Email = table.Column<string>(type: "varchar(255)", nullable: true),
@@ -206,27 +208,27 @@ namespace TKXDPM_API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Bikes",
-                columns: new[] { "BikeId", "BatterCapacity", "BikeName", "Deposit", "Description", "HourlyRent", "LicensePlates", "PowerDrain", "Size", "StartingRent", "Type" },
+                columns: new[] { "BikeId", "BatterCapacity", "BikeImage", "BikeName", "Deposit", "Description", "HourlyRent", "LicensePlates", "PowerDrain", "Size", "StartingRent", "Type" },
                 values: new object[,]
                 {
-                    { 300006, 80, "Xe đạp điện homesheel FTN T5s", 700000, "Xe điện thể thao gấp gọn Homesheel T5S vượt ra ngoài quy chuẩn thiết kế! Đẳng cấp và sang trọng tạo nên sự khác biết của NGHÀNH XE ĐIỆN", 3000, "99A-0006", 300f, 26, 10000, 3 },
-                    { 300005, 80, "Xe Đạp Điện Bluera Cap X 2019", 700000, "Xe đạp điện Cap X 2019 là sản phẩm độc quyền được thiết kế và sản xuất bởi Đại Lý Xe Điện Bluera Việt Nhật. Với kiểu dáng và các màu sắc nổi bật phù hợp với mọi đối tượng sử dụng, đặc biệt Cap X 2019 sẽ bật tung phong cách cá tính riêng của các bạn trẻ tràn đầy năng lượng.", 3000, "99A-0005", 300f, 26, 10000, 3 },
-                    { 300004, 90, "Xe Đạp Điện Pega Bike Zinger", 700000, "Bứt phá giới hạn của xe điện với 80km chỉ với 1 lần sạc .Động cơ mạnh mẽ, thỏa mãn những tay lái cừ khôi nhất.Cực kỳ an toàn nhờ phanh đĩa trước và lốp không săm.Tiết kiệm hơn 34 lần so với xe máy chạy xăng", 3000, "99A-0004", 300f, 26, 10000, 3 },
-                    { 300003, 80, "Xe đạp điện homesheel FTN T5s", 700000, "Xe điện thể thao gấp gọn Homesheel T5S vượt ra ngoài quy chuẩn thiết kế! Đẳng cấp và sang trọng tạo nên sự khác biết của NGHÀNH XE ĐIỆN", 3000, "99A-0003", 300f, 26, 10000, 3 },
-                    { 300002, 100, "Xe Đạp Điện Bluera Cap X 2019", 700000, "Xe đạp điện Cap X 2019 là sản phẩm độc quyền được thiết kế và sản xuất bởi Đại Lý Xe Điện Bluera Việt Nhật. Với kiểu dáng và các màu sắc nổi bật phù hợp với mọi đối tượng sử dụng, đặc biệt Cap X 2019 sẽ bật tung phong cách cá tính riêng của các bạn trẻ tràn đầy năng lượng.", 3000, "99A-0002", 300f, 26, 10000, 3 },
-                    { 300001, 90, "Xe Đạp Điện Pega Bike Zinger", 700000, "Bứt phá giới hạn của xe điện với 80km chỉ với 1 lần sạc .Động cơ mạnh mẽ, thỏa mãn những tay lái cừ khôi nhất.Cực kỳ an toàn nhờ phanh đĩa trước và lốp không săm.Tiết kiệm hơn 34 lần so với xe máy chạy xăng", 3000, "99A-0001", 300f, 26, 10000, 3 },
-                    { 200006, 0, "Xe đạp đôi PAX-2R-SPORT", 550000, "hiết kế mới và tạo nên sự khác biệt hoàn toàn của xe đạp đôi PAX là hệ thống Dĩa Líp cùng nằm một bên xe, kết nối trực tiếp với nhau từ người ngồi trước và sau, điều này giúp cho người ngồi trước và ngồi sau có thể đạp tự do, tạo nên sự dễ dàng và thỏa mái khi đạp xe đạp đôi.", 3000, "88A-0006", 0f, 26, 10000, 2 },
-                    { 200005, 0, "Xe đạp đôi PAX-2B-SPORT", 550000, "Thiết kế mới và tạo nên sự khác biệt hoàn toàn của xe đạp đôi PAX là hệ thống Dĩa Líp cùng nằm một bên xe, kết nối trực tiếp với nhau từ người ngồi trước và sau, điều này giúp cho người ngồi trước và ngồi sau có thể đạp tự do, tạo nên sự dễ dàng và thỏa mái khi đạp xe đạp đôi.", 3000, "88A-0005", 0f, 26, 10000, 2 },
-                    { 200004, 0, "XE ĐẠP ĐÔI PAX 1-SPORT", 550000, "Xe đạp đôi PAX 1B-SPORT màu xanh có thể coi là một mẫu xe đạp đôi có thiết kế đẹp và ấn tượng của PAX kể từ trước tới nay. Ngoài thiết kế đẹp, mẫu xe đạp này còn được lắp ráp bởi các linh kiện có chất lượng tốt và đồng bộ. ", 3000, "88A-0004", 0f, 26, 10000, 2 },
-                    { 100001, 0, "Xe đạp đua Fornix F8", 400000, "Với thiết kế mạnh mẽ đầy cá tính, FORNIX F8 còn mang đến cho bạn những trải nghiệm tốc độ của bộ truyền động đầy mạnh mẽ mới nhất từ thương hiệu SHIMANO.", 3000, "77A-0001", 0f, 26, 10000, 1 },
-                    { 200002, 0, "Xe đạp đôi PAX-2B-SPORT", 550000, "Thiết kế mới và tạo nên sự khác biệt hoàn toàn của xe đạp đôi PAX là hệ thống Dĩa Líp cùng nằm một bên xe, kết nối trực tiếp với nhau từ người ngồi trước và sau, điều này giúp cho người ngồi trước và ngồi sau có thể đạp tự do, tạo nên sự dễ dàng và thỏa mái khi đạp xe đạp đôi.", 3000, "88A-0002", 0f, 26, 10000, 2 },
-                    { 200001, 0, "XE ĐẠP ĐÔI PAX 1-SPORT", 550000, "Xe đạp đôi PAX 1B-SPORT màu xanh có thể coi là một mẫu xe đạp đôi có thiết kế đẹp và ấn tượng của PAX kể từ trước tới nay. Ngoài thiết kế đẹp, mẫu xe đạp này còn được lắp ráp bởi các linh kiện có chất lượng tốt và đồng bộ. ", 3000, "88A-0001", 0f, 26, 10000, 2 },
-                    { 100006, 0, "Xe đạp địa hình HaHoo", 400000, "Xe đạp HaHoo: Khung sườn xe được làm bằng hợp kim thép không gỉ, đảm bảo độ chắn chắn cho xe, có thể chịu được tải trọng của 2 người lớn. Bánh xe cực kool 26 inchs dễ dàng di chuyển với cá tính cực ngầu trong mắt mọi người.", 3000, "77A-0006", 0f, 26, 10000, 1 },
-                    { 100005, 0, "Xe đạp leo núi", 400000, "Xe Đạp Xe đạp leo núi Fat Bike của Đài Loan là một trong những chiếc xe độc đáo và mới lạ tại Việt Nam. Với đặc điểm chính là chiếc bánh xe khổng lồ tạo nên một chiếc xe khá lạ mắt.", 3000, "77A-0005", 0f, 26, 10000, 1 },
-                    { 100004, 0, "Xe đạp đua Fornix F8", 400000, "Với thiết kế mạnh mẽ đầy cá tính, FORNIX F8 còn mang đến cho bạn những trải nghiệm tốc độ của bộ truyền động đầy mạnh mẽ mới nhất từ thương hiệu SHIMANO.", 3000, "77A-0004", 0f, 26, 10000, 1 },
-                    { 100003, 0, "Xe đạp địa hình HaHoo", 400000, "Xe đạp HaHoo: Khung sườn xe được làm bằng hợp kim thép không gỉ, đảm bảo độ chắn chắn cho xe, có thể chịu được tải trọng của 2 người lớn. Bánh xe cực kool 26 inchs dễ dàng di chuyển với cá tính cực ngầu trong mắt mọi người.", 3000, "77A-0003", 0f, 26, 10000, 1 },
-                    { 100002, 0, "Xe đạp leo núi", 400000, "Xe Đạp Xe đạp leo núi Fat Bike của Đài Loan là một trong những chiếc xe độc đáo và mới lạ tại Việt Nam. Với đặc điểm chính là chiếc bánh xe khổng lồ tạo nên một chiếc xe khá lạ mắt.", 3000, "77A-0002", 0f, 26, 10000, 1 },
-                    { 200003, 0, "Xe đạp đôi PAX-2R-SPORT", 550000, "hiết kế mới và tạo nên sự khác biệt hoàn toàn của xe đạp đôi PAX là hệ thống Dĩa Líp cùng nằm một bên xe, kết nối trực tiếp với nhau từ người ngồi trước và sau, điều này giúp cho người ngồi trước và ngồi sau có thể đạp tự do, tạo nên sự dễ dàng và thỏa mái khi đạp xe đạp đôi.", 3000, "88A-0003", 0f, 26, 10000, 2 }
+                    { 300006, 80, "https://homesheel.com.vn/wp-content/uploads/2020/07/T5S_DEN.jpg", "Xe đạp điện homesheel FTN T5s", 700000, "Xe điện thể thao gấp gọn Homesheel T5S vượt ra ngoài quy chuẩn thiết kế! Đẳng cấp và sang trọng tạo nên sự khác biết của NGHÀNH XE ĐIỆN", 3000, "99A-0006", 300f, 26, 10000, 3 },
+                    { 300005, 80, "https://dailyxedien.vn/wp-content/uploads/2020/02/xe-dap-dien-cap-x-pro-update-01-768x768.jpg", "Xe Đạp Điện Bluera Cap X 2019", 700000, "Xe đạp điện Cap X 2019 là sản phẩm độc quyền được thiết kế và sản xuất bởi Đại Lý Xe Điện Bluera Việt Nhật. Với kiểu dáng và các màu sắc nổi bật phù hợp với mọi đối tượng sử dụng, đặc biệt Cap X 2019 sẽ bật tung phong cách cá tính riêng của các bạn trẻ tràn đầy năng lượng.", 3000, "99A-0005", 300f, 26, 10000, 3 },
+                    { 300004, 90, "https://salt.tikicdn.com/cache/w444/ts/product/a0/d9/c7/1576226a1ee3c162d3d3c5ab441691ec.jpg", "Xe Đạp Điện Pega Bike Zinger", 700000, "Bứt phá giới hạn của xe điện với 80km chỉ với 1 lần sạc .Động cơ mạnh mẽ, thỏa mãn những tay lái cừ khôi nhất.Cực kỳ an toàn nhờ phanh đĩa trước và lốp không săm.Tiết kiệm hơn 34 lần so với xe máy chạy xăng", 3000, "99A-0004", 300f, 26, 10000, 3 },
+                    { 300003, 80, "https://homesheel.com.vn/wp-content/uploads/2020/07/T5S_DEN.jpg", "Xe đạp điện homesheel FTN T5s", 700000, "Xe điện thể thao gấp gọn Homesheel T5S vượt ra ngoài quy chuẩn thiết kế! Đẳng cấp và sang trọng tạo nên sự khác biết của NGHÀNH XE ĐIỆN", 3000, "99A-0003", 300f, 26, 10000, 3 },
+                    { 300002, 100, "https://dailyxedien.vn/wp-content/uploads/2020/02/xe-dap-dien-cap-x-pro-update-01-768x768.jpg", "Xe Đạp Điện Bluera Cap X 2019", 700000, "Xe đạp điện Cap X 2019 là sản phẩm độc quyền được thiết kế và sản xuất bởi Đại Lý Xe Điện Bluera Việt Nhật. Với kiểu dáng và các màu sắc nổi bật phù hợp với mọi đối tượng sử dụng, đặc biệt Cap X 2019 sẽ bật tung phong cách cá tính riêng của các bạn trẻ tràn đầy năng lượng.", 3000, "99A-0002", 300f, 26, 10000, 3 },
+                    { 300001, 90, "https://salt.tikicdn.com/cache/w444/ts/product/a0/d9/c7/1576226a1ee3c162d3d3c5ab441691ec.jpg", "Xe Đạp Điện Pega Bike Zinger", 700000, "Bứt phá giới hạn của xe điện với 80km chỉ với 1 lần sạc .Động cơ mạnh mẽ, thỏa mãn những tay lái cừ khôi nhất.Cực kỳ an toàn nhờ phanh đĩa trước và lốp không săm.Tiết kiệm hơn 34 lần so với xe máy chạy xăng", 3000, "99A-0001", 300f, 26, 10000, 3 },
+                    { 200006, 0, "https://paxbikes.com/wp-content/uploads/2020/07/xe-dap-doi-pax-6r.jpg", "Xe đạp đôi PAX-2R-SPORT", 550000, "hiết kế mới và tạo nên sự khác biệt hoàn toàn của xe đạp đôi PAX là hệ thống Dĩa Líp cùng nằm một bên xe, kết nối trực tiếp với nhau từ người ngồi trước và sau, điều này giúp cho người ngồi trước và ngồi sau có thể đạp tự do, tạo nên sự dễ dàng và thỏa mái khi đạp xe đạp đôi.", 3000, "88A-0006", 0f, 26, 10000, 2 },
+                    { 200005, 0, "https://paxbikes.com/wp-content/uploads/2020/07/xe-dap-doi-pax-6b.jpg", "Xe đạp đôi PAX-2B-SPORT", 550000, "Thiết kế mới và tạo nên sự khác biệt hoàn toàn của xe đạp đôi PAX là hệ thống Dĩa Líp cùng nằm một bên xe, kết nối trực tiếp với nhau từ người ngồi trước và sau, điều này giúp cho người ngồi trước và ngồi sau có thể đạp tự do, tạo nên sự dễ dàng và thỏa mái khi đạp xe đạp đôi.", 3000, "88A-0005", 0f, 26, 10000, 2 },
+                    { 200004, 0, "https://paxbikes.com/wp-content/uploads/2020/07/xe-dap-doi-pax-6s.jpg", "XE ĐẠP ĐÔI PAX 1-SPORT", 550000, "Xe đạp đôi PAX 1B-SPORT màu xanh có thể coi là một mẫu xe đạp đôi có thiết kế đẹp và ấn tượng của PAX kể từ trước tới nay. Ngoài thiết kế đẹp, mẫu xe đạp này còn được lắp ráp bởi các linh kiện có chất lượng tốt và đồng bộ. ", 3000, "88A-0004", 0f, 26, 10000, 2 },
+                    { 100001, 0, "https://product.hstatic.net/1000119998/product/xe-dap-the-thao-fornix-f8-4_a07b9f357957448288df8630f0f4c55d_master.jpg", "Xe đạp đua Fornix F8", 400000, "Với thiết kế mạnh mẽ đầy cá tính, FORNIX F8 còn mang đến cho bạn những trải nghiệm tốc độ của bộ truyền động đầy mạnh mẽ mới nhất từ thương hiệu SHIMANO.", 3000, "77A-0001", 0f, 26, 10000, 1 },
+                    { 200002, 0, "https://paxbikes.com/wp-content/uploads/2020/07/xe-dap-doi-pax-6b.jpg", "Xe đạp đôi PAX-2B-SPORT", 550000, "Thiết kế mới và tạo nên sự khác biệt hoàn toàn của xe đạp đôi PAX là hệ thống Dĩa Líp cùng nằm một bên xe, kết nối trực tiếp với nhau từ người ngồi trước và sau, điều này giúp cho người ngồi trước và ngồi sau có thể đạp tự do, tạo nên sự dễ dàng và thỏa mái khi đạp xe đạp đôi.", 3000, "88A-0002", 0f, 26, 10000, 2 },
+                    { 200001, 0, "https://paxbikes.com/wp-content/uploads/2020/07/xe-dap-doi-pax-6s.jpg", "XE ĐẠP ĐÔI PAX 1-SPORT", 550000, "Xe đạp đôi PAX 1B-SPORT màu xám có thể coi là một mẫu xe đạp đôi có thiết kế đẹp và ấn tượng của PAX kể từ trước tới nay. Ngoài thiết kế đẹp, mẫu xe đạp này còn được lắp ráp bởi các linh kiện có chất lượng tốt và đồng bộ. ", 3000, "88A-0001", 0f, 26, 10000, 2 },
+                    { 100006, 0, "https://vn-test-11.slatic.net/p/276cb18780530b969e8b4121585c409e.jpg_800x800Q100.jpg", "Xe đạp địa hình HaHoo", 400000, "Xe đạp HaHoo: Khung sườn xe được làm bằng hợp kim thép không gỉ, đảm bảo độ chắn chắn cho xe, có thể chịu được tải trọng của 2 người lớn. Bánh xe cực kool 26 inchs dễ dàng di chuyển với cá tính cực ngầu trong mắt mọi người.", 3000, "77A-0006", 0f, 26, 10000, 1 },
+                    { 100005, 0, "https://xedapthegioi.vn/wp-content/uploads/2017/06/xe-dap-the-thao-trinx-junior-1.0-2017-1.jpg", "Xe đạp leo núi", 400000, "Xe Đạp Xe đạp leo núi Fat Bike của Đài Loan là một trong những chiếc xe độc đáo và mới lạ tại Việt Nam. Với đặc điểm chính là chiếc bánh xe khổng lồ tạo nên một chiếc xe khá lạ mắt.", 3000, "77A-0005", 0f, 26, 10000, 1 },
+                    { 100004, 0, "https://product.hstatic.net/1000119998/product/xe-dap-the-thao-fornix-f8-4_a07b9f357957448288df8630f0f4c55d_master.jpg", "Xe đạp đua Fornix F8", 400000, "Với thiết kế mạnh mẽ đầy cá tính, FORNIX F8 còn mang đến cho bạn những trải nghiệm tốc độ của bộ truyền động đầy mạnh mẽ mới nhất từ thương hiệu SHIMANO.", 3000, "77A-0004", 0f, 26, 10000, 1 },
+                    { 100003, 0, "https://vn-test-11.slatic.net/p/276cb18780530b969e8b4121585c409e.jpg_800x800Q100.jpg", "Xe đạp địa hình HaHoo", 400000, "Xe đạp HaHoo: Khung sườn xe được làm bằng hợp kim thép không gỉ, đảm bảo độ chắn chắn cho xe, có thể chịu được tải trọng của 2 người lớn. Bánh xe cực kool 26 inchs dễ dàng di chuyển với cá tính cực ngầu trong mắt mọi người.", 3000, "77A-0003", 0f, 26, 10000, 1 },
+                    { 100002, 0, "https://xedapthegioi.vn/wp-content/uploads/2017/06/xe-dap-the-thao-trinx-junior-1.0-2017-1.jpg", "Xe đạp leo núi", 400000, "Xe Đạp Xe đạp leo núi Fat Bike của Đài Loan là một trong những chiếc xe độc đáo và mới lạ tại Việt Nam. Với đặc điểm chính là chiếc bánh xe khổng lồ tạo nên một chiếc xe khá lạ mắt.", 3000, "77A-0002", 0f, 26, 10000, 1 },
+                    { 200003, 0, "https://paxbikes.com/wp-content/uploads/2020/07/xe-dap-doi-pax-6r.jpg", "Xe đạp đôi PAX-2R-SPORT", 550000, "hiết kế mới và tạo nên sự khác biệt hoàn toàn của xe đạp đôi PAX là hệ thống Dĩa Líp cùng nằm một bên xe, kết nối trực tiếp với nhau từ người ngồi trước và sau, điều này giúp cho người ngồi trước và ngồi sau có thể đạp tự do, tạo nên sự dễ dàng và thỏa mái khi đạp xe đạp đôi.", 3000, "88A-0003", 0f, 26, 10000, 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -259,15 +261,15 @@ namespace TKXDPM_API.Migrations
 
             migrationBuilder.InsertData(
                 table: "Stations",
-                columns: new[] { "StationId", "AddressId", "Area", "ContactName", "Email", "Phone", "StationName" },
+                columns: new[] { "StationId", "AddressId", "Area", "ContactName", "Email", "Phone", "StationImage", "StationName" },
                 values: new object[,]
                 {
-                    { 1001, 1001, 500f, "Hạ Đình", "ecohadinh@gmail.ccom", "0906232138", null },
-                    { 1002, 1002, 500f, "Lê Trọng Tấn", "ecoletrongtan@gmail.com", "0962610374", null },
-                    { 1003, 1003, 500f, "Lương Thế Vinh", "ecoluongthevinh@gmail.com", "0936656669", null },
-                    { 1004, 1004, 500f, "Khuất Duy Tiến", "ecokhuatduytien@gmail.com", "0466519528", null },
-                    { 1005, 1005, 500f, "Nguyễn Trãi", "econguyentrai@gmail.com", "0987866389", null },
-                    { 1006, 1006, 500f, "Trường Chinh", "ecotruongchinh@gmail.com", "0987866389", null }
+                    { 1001, 1001, 500f, "Starbuck Ecopark", "aeon.ecopark@gmail.ccom", "0906232138", "https://ecoparker.s3.ap-southeast-1.amazonaws.com/s3fs-public/styles/8_col/public/nha%20hang/starbucks-ecopark-13.jpg?itok=Pvth7skq", null },
+                    { 1002, 1002, 500f, "Sân Golf Rừng Cọ - Ecopark", "tennis.ecopark@gmail.com", "0962610374", "http://ecoparksupport.com/wp-content/uploads/2020/05/san-golf-ecopark-1.jpg", null },
+                    { 1003, 1003, 500f, "Công viên mùa xuân - Spring Park", "springpark.ecopark@gmail.com", "0936656669", "https://ecoparker.s3.ap-southeast-1.amazonaws.com/s3fs-public/pictures/cong-vien-ho-thien-nga-ecopark-1.jpg", null },
+                    { 1004, 1004, 500f, "Công viên mùa hạ", "summerpark.ecopark@gmail.com", "0466519528", "https://ecoparker.s3.ap-southeast-1.amazonaws.com/choi/cong-vien-mua-ha-ecopark-02.jpg", null },
+                    { 1005, 1005, 500f, "Công viên mùa đông", "winterpark.ecopark@gmail.com", "0987866389", "https://ecoparker.s3.ap-southeast-1.amazonaws.com/choi/cung-duong-ecopark-grand-10.jpg", null },
+                    { 1006, 1006, 500f, "Công viên mùa thu", "autumpark.ecopark@gmail.com", "0987866389", "https://datvietvnn.com/wp-content/uploads/2020/05/cong-vien-mua-ha-ecopark.jpg", null }
                 });
 
             migrationBuilder.InsertData(
@@ -341,8 +343,7 @@ namespace TKXDPM_API.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Rentals_RenterId",
                 table: "Rentals",
-                column: "RenterId",
-                unique: true);
+                column: "RenterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Stations_AddressId",

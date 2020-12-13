@@ -8,8 +8,8 @@ namespace TKXDPM_API.Model
     {
         [Key] public int StationId { get; set; }
 
-        public string StationName { get; set; }
-        public string StationImage { get; set; }
+        [Column(TypeName = "varchar(255)")] public string StationName { get; set; }
+        [Column(TypeName = "varchar(512)")] public string StationImage { get; set; }
         public int AddressId { get; set; }
         public Address Address { get; set; }
         [Column(TypeName = "varchar(255)")] public string ContactName { get; set; }

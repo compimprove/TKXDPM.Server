@@ -94,6 +94,9 @@ namespace TKXDPM_API.Migrations
                     b.Property<int>("BatterCapacity")
                         .HasColumnType("integer");
 
+                    b.Property<string>("BikeImage")
+                        .HasColumnType("varchar(512)");
+
                     b.Property<string>("BikeName")
                         .HasColumnType("varchar(255)");
 
@@ -130,6 +133,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 100001,
                             BatterCapacity = 0,
+                            BikeImage = "https://product.hstatic.net/1000119998/product/xe-dap-the-thao-fornix-f8-4_a07b9f357957448288df8630f0f4c55d_master.jpg",
                             BikeName = "Xe đạp đua Fornix F8",
                             Deposit = 400000,
                             Description = "Với thiết kế mạnh mẽ đầy cá tính, FORNIX F8 còn mang đến cho bạn những trải nghiệm tốc độ của bộ truyền động đầy mạnh mẽ mới nhất từ thương hiệu SHIMANO.",
@@ -144,6 +148,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 100002,
                             BatterCapacity = 0,
+                            BikeImage = "https://xedapthegioi.vn/wp-content/uploads/2017/06/xe-dap-the-thao-trinx-junior-1.0-2017-1.jpg",
                             BikeName = "Xe đạp leo núi",
                             Deposit = 400000,
                             Description = "Xe Đạp Xe đạp leo núi Fat Bike của Đài Loan là một trong những chiếc xe độc đáo và mới lạ tại Việt Nam. Với đặc điểm chính là chiếc bánh xe khổng lồ tạo nên một chiếc xe khá lạ mắt.",
@@ -158,6 +163,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 100003,
                             BatterCapacity = 0,
+                            BikeImage = "https://vn-test-11.slatic.net/p/276cb18780530b969e8b4121585c409e.jpg_800x800Q100.jpg",
                             BikeName = "Xe đạp địa hình HaHoo",
                             Deposit = 400000,
                             Description = "Xe đạp HaHoo: Khung sườn xe được làm bằng hợp kim thép không gỉ, đảm bảo độ chắn chắn cho xe, có thể chịu được tải trọng của 2 người lớn. Bánh xe cực kool 26 inchs dễ dàng di chuyển với cá tính cực ngầu trong mắt mọi người.",
@@ -172,6 +178,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 100004,
                             BatterCapacity = 0,
+                            BikeImage = "https://product.hstatic.net/1000119998/product/xe-dap-the-thao-fornix-f8-4_a07b9f357957448288df8630f0f4c55d_master.jpg",
                             BikeName = "Xe đạp đua Fornix F8",
                             Deposit = 400000,
                             Description = "Với thiết kế mạnh mẽ đầy cá tính, FORNIX F8 còn mang đến cho bạn những trải nghiệm tốc độ của bộ truyền động đầy mạnh mẽ mới nhất từ thương hiệu SHIMANO.",
@@ -186,6 +193,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 100005,
                             BatterCapacity = 0,
+                            BikeImage = "https://xedapthegioi.vn/wp-content/uploads/2017/06/xe-dap-the-thao-trinx-junior-1.0-2017-1.jpg",
                             BikeName = "Xe đạp leo núi",
                             Deposit = 400000,
                             Description = "Xe Đạp Xe đạp leo núi Fat Bike của Đài Loan là một trong những chiếc xe độc đáo và mới lạ tại Việt Nam. Với đặc điểm chính là chiếc bánh xe khổng lồ tạo nên một chiếc xe khá lạ mắt.",
@@ -200,6 +208,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 100006,
                             BatterCapacity = 0,
+                            BikeImage = "https://vn-test-11.slatic.net/p/276cb18780530b969e8b4121585c409e.jpg_800x800Q100.jpg",
                             BikeName = "Xe đạp địa hình HaHoo",
                             Deposit = 400000,
                             Description = "Xe đạp HaHoo: Khung sườn xe được làm bằng hợp kim thép không gỉ, đảm bảo độ chắn chắn cho xe, có thể chịu được tải trọng của 2 người lớn. Bánh xe cực kool 26 inchs dễ dàng di chuyển với cá tính cực ngầu trong mắt mọi người.",
@@ -214,9 +223,10 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 200001,
                             BatterCapacity = 0,
+                            BikeImage = "https://paxbikes.com/wp-content/uploads/2020/07/xe-dap-doi-pax-6s.jpg",
                             BikeName = "XE ĐẠP ĐÔI PAX 1-SPORT",
                             Deposit = 550000,
-                            Description = "Xe đạp đôi PAX 1B-SPORT màu xanh có thể coi là một mẫu xe đạp đôi có thiết kế đẹp và ấn tượng của PAX kể từ trước tới nay. Ngoài thiết kế đẹp, mẫu xe đạp này còn được lắp ráp bởi các linh kiện có chất lượng tốt và đồng bộ. ",
+                            Description = "Xe đạp đôi PAX 1B-SPORT màu xám có thể coi là một mẫu xe đạp đôi có thiết kế đẹp và ấn tượng của PAX kể từ trước tới nay. Ngoài thiết kế đẹp, mẫu xe đạp này còn được lắp ráp bởi các linh kiện có chất lượng tốt và đồng bộ. ",
                             HourlyRent = 3000,
                             LicensePlates = "88A-0001",
                             PowerDrain = 0f,
@@ -228,6 +238,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 200002,
                             BatterCapacity = 0,
+                            BikeImage = "https://paxbikes.com/wp-content/uploads/2020/07/xe-dap-doi-pax-6b.jpg",
                             BikeName = "Xe đạp đôi PAX-2B-SPORT",
                             Deposit = 550000,
                             Description = "Thiết kế mới và tạo nên sự khác biệt hoàn toàn của xe đạp đôi PAX là hệ thống Dĩa Líp cùng nằm một bên xe, kết nối trực tiếp với nhau từ người ngồi trước và sau, điều này giúp cho người ngồi trước và ngồi sau có thể đạp tự do, tạo nên sự dễ dàng và thỏa mái khi đạp xe đạp đôi.",
@@ -242,6 +253,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 200003,
                             BatterCapacity = 0,
+                            BikeImage = "https://paxbikes.com/wp-content/uploads/2020/07/xe-dap-doi-pax-6r.jpg",
                             BikeName = "Xe đạp đôi PAX-2R-SPORT",
                             Deposit = 550000,
                             Description = "hiết kế mới và tạo nên sự khác biệt hoàn toàn của xe đạp đôi PAX là hệ thống Dĩa Líp cùng nằm một bên xe, kết nối trực tiếp với nhau từ người ngồi trước và sau, điều này giúp cho người ngồi trước và ngồi sau có thể đạp tự do, tạo nên sự dễ dàng và thỏa mái khi đạp xe đạp đôi.",
@@ -256,6 +268,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 200004,
                             BatterCapacity = 0,
+                            BikeImage = "https://paxbikes.com/wp-content/uploads/2020/07/xe-dap-doi-pax-6s.jpg",
                             BikeName = "XE ĐẠP ĐÔI PAX 1-SPORT",
                             Deposit = 550000,
                             Description = "Xe đạp đôi PAX 1B-SPORT màu xanh có thể coi là một mẫu xe đạp đôi có thiết kế đẹp và ấn tượng của PAX kể từ trước tới nay. Ngoài thiết kế đẹp, mẫu xe đạp này còn được lắp ráp bởi các linh kiện có chất lượng tốt và đồng bộ. ",
@@ -270,6 +283,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 200005,
                             BatterCapacity = 0,
+                            BikeImage = "https://paxbikes.com/wp-content/uploads/2020/07/xe-dap-doi-pax-6b.jpg",
                             BikeName = "Xe đạp đôi PAX-2B-SPORT",
                             Deposit = 550000,
                             Description = "Thiết kế mới và tạo nên sự khác biệt hoàn toàn của xe đạp đôi PAX là hệ thống Dĩa Líp cùng nằm một bên xe, kết nối trực tiếp với nhau từ người ngồi trước và sau, điều này giúp cho người ngồi trước và ngồi sau có thể đạp tự do, tạo nên sự dễ dàng và thỏa mái khi đạp xe đạp đôi.",
@@ -284,6 +298,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 200006,
                             BatterCapacity = 0,
+                            BikeImage = "https://paxbikes.com/wp-content/uploads/2020/07/xe-dap-doi-pax-6r.jpg",
                             BikeName = "Xe đạp đôi PAX-2R-SPORT",
                             Deposit = 550000,
                             Description = "hiết kế mới và tạo nên sự khác biệt hoàn toàn của xe đạp đôi PAX là hệ thống Dĩa Líp cùng nằm một bên xe, kết nối trực tiếp với nhau từ người ngồi trước và sau, điều này giúp cho người ngồi trước và ngồi sau có thể đạp tự do, tạo nên sự dễ dàng và thỏa mái khi đạp xe đạp đôi.",
@@ -298,6 +313,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 300001,
                             BatterCapacity = 90,
+                            BikeImage = "https://salt.tikicdn.com/cache/w444/ts/product/a0/d9/c7/1576226a1ee3c162d3d3c5ab441691ec.jpg",
                             BikeName = "Xe Đạp Điện Pega Bike Zinger",
                             Deposit = 700000,
                             Description = "Bứt phá giới hạn của xe điện với 80km chỉ với 1 lần sạc .Động cơ mạnh mẽ, thỏa mãn những tay lái cừ khôi nhất.Cực kỳ an toàn nhờ phanh đĩa trước và lốp không săm.Tiết kiệm hơn 34 lần so với xe máy chạy xăng",
@@ -312,6 +328,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 300002,
                             BatterCapacity = 100,
+                            BikeImage = "https://dailyxedien.vn/wp-content/uploads/2020/02/xe-dap-dien-cap-x-pro-update-01-768x768.jpg",
                             BikeName = "Xe Đạp Điện Bluera Cap X 2019",
                             Deposit = 700000,
                             Description = "Xe đạp điện Cap X 2019 là sản phẩm độc quyền được thiết kế và sản xuất bởi Đại Lý Xe Điện Bluera Việt Nhật. Với kiểu dáng và các màu sắc nổi bật phù hợp với mọi đối tượng sử dụng, đặc biệt Cap X 2019 sẽ bật tung phong cách cá tính riêng của các bạn trẻ tràn đầy năng lượng.",
@@ -326,6 +343,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 300003,
                             BatterCapacity = 80,
+                            BikeImage = "https://homesheel.com.vn/wp-content/uploads/2020/07/T5S_DEN.jpg",
                             BikeName = "Xe đạp điện homesheel FTN T5s",
                             Deposit = 700000,
                             Description = "Xe điện thể thao gấp gọn Homesheel T5S vượt ra ngoài quy chuẩn thiết kế! Đẳng cấp và sang trọng tạo nên sự khác biết của NGHÀNH XE ĐIỆN",
@@ -340,6 +358,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 300004,
                             BatterCapacity = 90,
+                            BikeImage = "https://salt.tikicdn.com/cache/w444/ts/product/a0/d9/c7/1576226a1ee3c162d3d3c5ab441691ec.jpg",
                             BikeName = "Xe Đạp Điện Pega Bike Zinger",
                             Deposit = 700000,
                             Description = "Bứt phá giới hạn của xe điện với 80km chỉ với 1 lần sạc .Động cơ mạnh mẽ, thỏa mãn những tay lái cừ khôi nhất.Cực kỳ an toàn nhờ phanh đĩa trước và lốp không săm.Tiết kiệm hơn 34 lần so với xe máy chạy xăng",
@@ -354,6 +373,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 300005,
                             BatterCapacity = 80,
+                            BikeImage = "https://dailyxedien.vn/wp-content/uploads/2020/02/xe-dap-dien-cap-x-pro-update-01-768x768.jpg",
                             BikeName = "Xe Đạp Điện Bluera Cap X 2019",
                             Deposit = 700000,
                             Description = "Xe đạp điện Cap X 2019 là sản phẩm độc quyền được thiết kế và sản xuất bởi Đại Lý Xe Điện Bluera Việt Nhật. Với kiểu dáng và các màu sắc nổi bật phù hợp với mọi đối tượng sử dụng, đặc biệt Cap X 2019 sẽ bật tung phong cách cá tính riêng của các bạn trẻ tràn đầy năng lượng.",
@@ -368,6 +388,7 @@ namespace TKXDPM_API.Migrations
                         {
                             BikeId = 300006,
                             BatterCapacity = 80,
+                            BikeImage = "https://homesheel.com.vn/wp-content/uploads/2020/07/T5S_DEN.jpg",
                             BikeName = "Xe đạp điện homesheel FTN T5s",
                             Deposit = 700000,
                             Description = "Xe điện thể thao gấp gọn Homesheel T5S vượt ra ngoài quy chuẩn thiết kế! Đẳng cấp và sang trọng tạo nên sự khác biết của NGHÀNH XE ĐIỆN",
@@ -794,8 +815,11 @@ namespace TKXDPM_API.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("varchar(255)");
 
+                    b.Property<string>("StationImage")
+                        .HasColumnType("varchar(512)");
+
                     b.Property<string>("StationName")
-                        .HasColumnType("text");
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("StationId");
 
@@ -809,54 +833,60 @@ namespace TKXDPM_API.Migrations
                             StationId = 1001,
                             AddressId = 1001,
                             Area = 500f,
-                            ContactName = "Hạ Đình",
-                            Email = "ecohadinh@gmail.ccom",
-                            Phone = "0906232138"
+                            ContactName = "Starbuck Ecopark",
+                            Email = "aeon.ecopark@gmail.ccom",
+                            Phone = "0906232138",
+                            StationImage = "https://ecoparker.s3.ap-southeast-1.amazonaws.com/s3fs-public/styles/8_col/public/nha%20hang/starbucks-ecopark-13.jpg?itok=Pvth7skq"
                         },
                         new
                         {
                             StationId = 1002,
                             AddressId = 1002,
                             Area = 500f,
-                            ContactName = "Lê Trọng Tấn",
-                            Email = "ecoletrongtan@gmail.com",
-                            Phone = "0962610374"
+                            ContactName = "Sân Golf Rừng Cọ - Ecopark",
+                            Email = "tennis.ecopark@gmail.com",
+                            Phone = "0962610374",
+                            StationImage = "http://ecoparksupport.com/wp-content/uploads/2020/05/san-golf-ecopark-1.jpg"
                         },
                         new
                         {
                             StationId = 1003,
                             AddressId = 1003,
                             Area = 500f,
-                            ContactName = "Lương Thế Vinh",
-                            Email = "ecoluongthevinh@gmail.com",
-                            Phone = "0936656669"
+                            ContactName = "Công viên mùa xuân - Spring Park",
+                            Email = "springpark.ecopark@gmail.com",
+                            Phone = "0936656669",
+                            StationImage = "https://ecoparker.s3.ap-southeast-1.amazonaws.com/s3fs-public/pictures/cong-vien-ho-thien-nga-ecopark-1.jpg"
                         },
                         new
                         {
                             StationId = 1004,
                             AddressId = 1004,
                             Area = 500f,
-                            ContactName = "Khuất Duy Tiến",
-                            Email = "ecokhuatduytien@gmail.com",
-                            Phone = "0466519528"
+                            ContactName = "Công viên mùa hạ",
+                            Email = "summerpark.ecopark@gmail.com",
+                            Phone = "0466519528",
+                            StationImage = "https://ecoparker.s3.ap-southeast-1.amazonaws.com/choi/cong-vien-mua-ha-ecopark-02.jpg"
                         },
                         new
                         {
                             StationId = 1005,
                             AddressId = 1005,
                             Area = 500f,
-                            ContactName = "Nguyễn Trãi",
-                            Email = "econguyentrai@gmail.com",
-                            Phone = "0987866389"
+                            ContactName = "Công viên mùa đông",
+                            Email = "winterpark.ecopark@gmail.com",
+                            Phone = "0987866389",
+                            StationImage = "https://ecoparker.s3.ap-southeast-1.amazonaws.com/choi/cung-duong-ecopark-grand-10.jpg"
                         },
                         new
                         {
                             StationId = 1006,
                             AddressId = 1006,
                             Area = 500f,
-                            ContactName = "Trường Chinh",
-                            Email = "ecotruongchinh@gmail.com",
-                            Phone = "0987866389"
+                            ContactName = "Công viên mùa thu",
+                            Email = "autumpark.ecopark@gmail.com",
+                            Phone = "0987866389",
+                            StationImage = "https://datvietvnn.com/wp-content/uploads/2020/05/cong-vien-mua-ha-ecopark.jpg"
                         });
                 });
 
