@@ -4,14 +4,7 @@
     <projectFile>TKXDPM_API.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="076ea576-e12e-49af-82de-dcd6f1d273eb" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TKXDPM.Server.dir/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TKXDPM.Server.dir/.idea/contentModel.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.TKXDPM.Server.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.TKXDPM.Server.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Bike.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Bike.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Model/Station.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Model/Station.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Seeder/BikeSeeder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Seeder/BikeSeeder.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Seeder/StationSeeder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Seeder/StationSeeder.cs" afterDir="false" />
-    </list>
+    <list default="true" id="076ea576-e12e-49af-82de-dcd6f1d273eb" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -123,7 +116,7 @@
       <workItem from="1607011486329" duration="1466000" />
       <workItem from="1607093242668" duration="6661000" />
       <workItem from="1607139490265" duration="8511000" />
-      <workItem from="1607867528163" duration="2644000" />
+      <workItem from="1607867528163" duration="3283000" />
     </task>
     <servers />
   </component>
