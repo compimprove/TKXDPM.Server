@@ -264,12 +264,12 @@ namespace TKXDPM_API.Migrations
                 columns: new[] { "StationId", "AddressId", "Area", "ContactName", "Email", "Phone", "StationImage", "StationName" },
                 values: new object[,]
                 {
-                    { 1001, 1001, 500f, "Starbuck Ecopark", "aeon.ecopark@gmail.ccom", "0906232138", "https://ecoparker.s3.ap-southeast-1.amazonaws.com/s3fs-public/styles/8_col/public/nha%20hang/starbucks-ecopark-13.jpg?itok=Pvth7skq", null },
-                    { 1002, 1002, 500f, "Sân Golf Rừng Cọ - Ecopark", "tennis.ecopark@gmail.com", "0962610374", "http://ecoparksupport.com/wp-content/uploads/2020/05/san-golf-ecopark-1.jpg", null },
-                    { 1003, 1003, 500f, "Công viên mùa xuân - Spring Park", "springpark.ecopark@gmail.com", "0936656669", "https://ecoparker.s3.ap-southeast-1.amazonaws.com/s3fs-public/pictures/cong-vien-ho-thien-nga-ecopark-1.jpg", null },
-                    { 1004, 1004, 500f, "Công viên mùa hạ", "summerpark.ecopark@gmail.com", "0466519528", "https://ecoparker.s3.ap-southeast-1.amazonaws.com/choi/cong-vien-mua-ha-ecopark-02.jpg", null },
-                    { 1005, 1005, 500f, "Công viên mùa đông", "winterpark.ecopark@gmail.com", "0987866389", "https://ecoparker.s3.ap-southeast-1.amazonaws.com/choi/cung-duong-ecopark-grand-10.jpg", null },
-                    { 1006, 1006, 500f, "Công viên mùa thu", "autumpark.ecopark@gmail.com", "0987866389", "https://datvietvnn.com/wp-content/uploads/2020/05/cong-vien-mua-ha-ecopark.jpg", null }
+                    { 1001, 1001, 500f, "Nguyễn Anh Dũng", "aeon.ecopark@gmail.ccom", "0906232138", "https://ecoparker.s3.ap-southeast-1.amazonaws.com/s3fs-public/styles/8_col/public/nha%20hang/starbucks-ecopark-13.jpg?itok=Pvth7skq", "Starbuck Ecopark" },
+                    { 1002, 1002, 500f, "Nguyễn Mạnh Hùng", "tennis.ecopark@gmail.com", "0962610374", "http://ecoparksupport.com/wp-content/uploads/2020/05/san-golf-ecopark-1.jpg", "Sân Golf Rừng Cọ - Ecopark" },
+                    { 1003, 1003, 500f, "Ngọ Anh Cường", "springpark.ecopark@gmail.com", "0936656669", "https://ecoparker.s3.ap-southeast-1.amazonaws.com/s3fs-public/pictures/cong-vien-ho-thien-nga-ecopark-1.jpg", "Công viên mùa xuân - Spring Park" },
+                    { 1004, 1004, 500f, "Vũ Hữu Đạt", "summerpark.ecopark@gmail.com", "0466519528", "https://ecoparker.s3.ap-southeast-1.amazonaws.com/choi/cong-vien-mua-ha-ecopark-02.jpg", "Công viên mùa hạ" },
+                    { 1005, 1005, 500f, "Nguyễn Đình Thắng", "winterpark.ecopark@gmail.com", "0987866389", "https://ecoparker.s3.ap-southeast-1.amazonaws.com/choi/cung-duong-ecopark-grand-10.jpg", "Công viên mùa đông" },
+                    { 1006, 1006, 500f, "Trương Anh Minh", "autumpark.ecopark@gmail.com", "0987866389", "https://datvietvnn.com/wp-content/uploads/2020/05/cong-vien-mua-ha-ecopark.jpg", "Công viên mùa thu" }
                 });
 
             migrationBuilder.InsertData(

@@ -10,7 +10,7 @@ using TKXDPM_API;
 namespace TKXDPM_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201213150609_Test")]
+    [Migration("20201214133016_Test")]
     partial class Test
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -835,60 +835,66 @@ namespace TKXDPM_API.Migrations
                             StationId = 1001,
                             AddressId = 1001,
                             Area = 500f,
-                            ContactName = "Starbuck Ecopark",
+                            ContactName = "Nguyễn Anh Dũng",
                             Email = "aeon.ecopark@gmail.ccom",
                             Phone = "0906232138",
-                            StationImage = "https://ecoparker.s3.ap-southeast-1.amazonaws.com/s3fs-public/styles/8_col/public/nha%20hang/starbucks-ecopark-13.jpg?itok=Pvth7skq"
+                            StationImage = "https://ecoparker.s3.ap-southeast-1.amazonaws.com/s3fs-public/styles/8_col/public/nha%20hang/starbucks-ecopark-13.jpg?itok=Pvth7skq",
+                            StationName = "Starbuck Ecopark"
                         },
                         new
                         {
                             StationId = 1002,
                             AddressId = 1002,
                             Area = 500f,
-                            ContactName = "Sân Golf Rừng Cọ - Ecopark",
+                            ContactName = "Nguyễn Mạnh Hùng",
                             Email = "tennis.ecopark@gmail.com",
                             Phone = "0962610374",
-                            StationImage = "http://ecoparksupport.com/wp-content/uploads/2020/05/san-golf-ecopark-1.jpg"
+                            StationImage = "http://ecoparksupport.com/wp-content/uploads/2020/05/san-golf-ecopark-1.jpg",
+                            StationName = "Sân Golf Rừng Cọ - Ecopark"
                         },
                         new
                         {
                             StationId = 1003,
                             AddressId = 1003,
                             Area = 500f,
-                            ContactName = "Công viên mùa xuân - Spring Park",
+                            ContactName = "Ngọ Anh Cường",
                             Email = "springpark.ecopark@gmail.com",
                             Phone = "0936656669",
-                            StationImage = "https://ecoparker.s3.ap-southeast-1.amazonaws.com/s3fs-public/pictures/cong-vien-ho-thien-nga-ecopark-1.jpg"
+                            StationImage = "https://ecoparker.s3.ap-southeast-1.amazonaws.com/s3fs-public/pictures/cong-vien-ho-thien-nga-ecopark-1.jpg",
+                            StationName = "Công viên mùa xuân - Spring Park"
                         },
                         new
                         {
                             StationId = 1004,
                             AddressId = 1004,
                             Area = 500f,
-                            ContactName = "Công viên mùa hạ",
+                            ContactName = "Vũ Hữu Đạt",
                             Email = "summerpark.ecopark@gmail.com",
                             Phone = "0466519528",
-                            StationImage = "https://ecoparker.s3.ap-southeast-1.amazonaws.com/choi/cong-vien-mua-ha-ecopark-02.jpg"
+                            StationImage = "https://ecoparker.s3.ap-southeast-1.amazonaws.com/choi/cong-vien-mua-ha-ecopark-02.jpg",
+                            StationName = "Công viên mùa hạ"
                         },
                         new
                         {
                             StationId = 1005,
                             AddressId = 1005,
                             Area = 500f,
-                            ContactName = "Công viên mùa đông",
+                            ContactName = "Nguyễn Đình Thắng",
                             Email = "winterpark.ecopark@gmail.com",
                             Phone = "0987866389",
-                            StationImage = "https://ecoparker.s3.ap-southeast-1.amazonaws.com/choi/cung-duong-ecopark-grand-10.jpg"
+                            StationImage = "https://ecoparker.s3.ap-southeast-1.amazonaws.com/choi/cung-duong-ecopark-grand-10.jpg",
+                            StationName = "Công viên mùa đông"
                         },
                         new
                         {
                             StationId = 1006,
                             AddressId = 1006,
                             Area = 500f,
-                            ContactName = "Công viên mùa thu",
+                            ContactName = "Trương Anh Minh",
                             Email = "autumpark.ecopark@gmail.com",
                             Phone = "0987866389",
-                            StationImage = "https://datvietvnn.com/wp-content/uploads/2020/05/cong-vien-mua-ha-ecopark.jpg"
+                            StationImage = "https://datvietvnn.com/wp-content/uploads/2020/05/cong-vien-mua-ha-ecopark.jpg",
+                            StationName = "Công viên mùa thu"
                         });
                 });
 
