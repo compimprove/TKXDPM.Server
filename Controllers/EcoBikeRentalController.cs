@@ -135,7 +135,7 @@ namespace TKXDPM_API.Controllers
         }
 
         [HttpGet("get-rental-info")]
-        public async Task<ActionResult<RentalResponse>> GetRentalInfoBikeById(string deviceCode)
+        public async Task<ActionResult<List<RentalResponse>>> GetRentalInfoBikeById(string deviceCode)
         {
             var renter = await _dbContext.FindRenter(deviceCode);
             if (renter == null)
@@ -143,17 +143,17 @@ namespace TKXDPM_API.Controllers
                 return NotFound($"Not found renter {deviceCode}");
             }
 
-            var rental = await _dbContext.Rentals
+            var rentals = await _dbContext.Rentals
                 .Where(r => r.RenterId == renter.RenterId)
                 .Include(r => r.Card)
                 .Include(r => r.Bike)
-                .Include(r => r.Transaction).FirstOrDefaultAsync();
-            if (rental == null)
+                .Include(r => r.Transaction).ToListAsync();
+            if (rentals.Count == 0)
             {
                 return NotFound($"Not found rental with renter {deviceCode}");
             }
 
-            var rentalResponse = _mapper.Map<RentalResponse>(rental);
+            var rentalResponse = _mapper.Map<List<RentalResponse>>(rentals);
 
             return Ok(rentalResponse);
         }
@@ -227,6 +227,27 @@ namespace TKXDPM_API.Controllers
             }
         }
 
+        public struct CheckRentBike
+        {
+            public bool Result { get; set; }
+        }
+
+        [HttpPost("check-rent-bike")]
+        public async Task<ActionResult<CheckRentBike>> CheckRentBikeTask(string deviceCode)
+        {
+            var renter = await _dbContext.FindRenter(deviceCode);
+            if (renter == null)
+            {
+                return NotFound($"The Renter with device Code {deviceCode} Not Found");
+            }
+
+            var result = await HasRentBike(renter.RenterId);
+            return new CheckRentBike()
+            {
+                Result = result
+            };
+        }
+
         [NonAction]
         public bool CheckDeposit(int deposit, Bike bike)
         {
@@ -273,6 +294,12 @@ namespace TKXDPM_API.Controllers
             if (station == null)
             {
                 return NotFound($"The Station {stationId} Not Found");
+            }
+
+            var renterFind = await _dbContext.FindRenter(deviceCode);
+            if (renterFind == null)
+            {
+                return NotFound($"The Renter with device Code {deviceCode} Not Found");
             }
 
             var bikeStation = new BikeInStation()
@@ -382,11 +409,5 @@ namespace TKXDPM_API.Controllers
                     return 0;
             }
         }
-    }
-
-    public static class CustomDateTime
-    {
-        public static TimeSpan TimespanOffset { get; set; } = new TimeSpan(0);
-        public static DateTime Now => DateTime.Now + TimespanOffset;
     }
 }

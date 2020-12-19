@@ -14,8 +14,6 @@ namespace TKXDPM_API.Model
         [Column(TypeName = "varchar(255)")] public string PaymentMethod { get; set; }
         public int Cvv { get; set; }
         public DateTime ExpirationDate { get; set; }
-
-        
     }
 
     public class CardRequest
