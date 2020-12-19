@@ -233,7 +233,7 @@ namespace TKXDPM_API.Controllers
         }
 
         [HttpPost("check-rent-bike")]
-        public async Task<ActionResult<CheckRentBike>> CheckRentBikeTask(string deviceCode)
+        public async Task<ActionResult<BikeResponse>> CheckRentBikeTask(string deviceCode)
         {
             var renter = await _dbContext.FindRenter(deviceCode);
             if (renter == null)
@@ -241,11 +241,23 @@ namespace TKXDPM_API.Controllers
                 return NotFound($"The Renter with device Code {deviceCode} Not Found");
             }
 
-            var result = await HasRentBike(renter.RenterId);
-            return new CheckRentBike()
+            var oldRentals =
+                await _dbContext.Rentals.Where(r => r.RenterId == renter.RenterId)
+                    .Include(r => r.Transaction)
+                    .Include(r => r.Bike)
+                    .ToListAsync();
+            var rental = oldRentals.Find(r =>
+                r.Transaction != null && (
+                    r.Transaction.BookedEndDateTime == DateTime.MinValue ||
+                    r.Transaction.BookedEndDateTime >= DateTime.Now));
+            if (rental != null)
             {
-                Result = result
-            };
+                return _mapper.Map<BikeResponse>(rental.Bike);
+            }
+            else
+            {
+                return NotFound("Not Found Rental");
+            }
         }
 
         [NonAction]
