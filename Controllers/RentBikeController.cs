@@ -43,10 +43,17 @@ namespace TKXDPM_API.Controllers
                 return NotFound($"The Renter with device Code {deviceCode} Not Found");
             }
 
-            var bike = await _dbContext.Bikes.FindAsync(bikeId);
+            var bike = await _dbContext.Bikes.Where(b => b.BikeId == bikeId).Include(b => b.Rentals)
+                .ThenInclude(r => r.Transaction)
+                .FirstOrDefaultAsync();
             if (bike == null)
             {
                 return NotFound($"The BikeId {bikeId} Not Found");
+            }
+
+            if (bike.IsRent())
+            {
+                return BadRequest($"The BikeId {bikeId} Is Rented By Other");
             }
 
             var hasRent = await HasRentBike(renter.RenterId);
@@ -60,7 +67,7 @@ namespace TKXDPM_API.Controllers
                 return NotFound($"The Card of renter {deviceCode} Not Found");
             }
 
-            if (CheckDeposit(deposit, bike))
+            if (deposit >= bike.Deposit)
             {
                 await RentBike(bike, renter);
                 return Ok();
