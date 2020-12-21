@@ -10,6 +10,7 @@ using TKXDPM_API.Model;
 
 namespace TKXDPM_API.Controllers
 {
+    [Route("api")]
     public class ReturnBikeController : ControllerBase
     {
         private readonly ILogger<ReturnBikeController> _logger;
@@ -33,6 +34,7 @@ namespace TKXDPM_API.Controllers
         {
             public int ReturnMoney { get; set; }
         }
+
         [HttpPost("return-bike")]
         public async Task<ActionResult<ReturnBikeResponse>> ReturnBike(string deviceCode,
             int stationId, int bikeId)
