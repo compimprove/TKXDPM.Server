@@ -102,7 +102,7 @@ namespace TKXDPM_API.Controllers
 
             return new ReturnBikeResponse()
             {
-                ReturnMoney = bike.Deposit - fee
+                ReturnMoney = fee
             };
         }
 
