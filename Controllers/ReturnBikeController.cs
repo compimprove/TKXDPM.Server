@@ -83,18 +83,19 @@ namespace TKXDPM_API.Controllers
                 return NotFound($"Renter {deviceCode} didn't have a rental");
             }
 
-            if (renter.Rentals[^1].Transaction == null)
+            var rental = renter.Rentals.Find(r => (r.Transaction != null && r.Transaction.PaymentStatus == PaymentStatus.Deposit));
+            if (rental?.Transaction == null)
             {
                 return NotFound($"Renter {deviceCode} didn't have a transaction");
             }
-
-            if (renter.Rentals[^1].BikeId != bikeId)
+            
+            if (rental.BikeId != bikeId)
             {
                 return BadRequest($"Renter {deviceCode} didn't rent bike {bikeId}");
             }
-
-            var transaction = renter.Rentals[^1].Transaction;
-            var totalMinutes = (bikeStation.DateTimeIn - transaction.BookedStartDateTime).TotalMinutes;
+            
+            var transaction = rental.Transaction;
+            var totalMinutes = (DateTime.Now - transaction.BookedStartDateTime).TotalMinutes;
             var fee = CalculateFee(totalMinutes, bike.Type);
             _logger.LogInformation("Total minutes " + totalMinutes);
 
@@ -140,19 +141,20 @@ namespace TKXDPM_API.Controllers
             {
                 return NotFound($"Renter {deviceCode} didn't have a rental");
             }
-
-            if (renter.Rentals[^1].Transaction == null)
+            
+            var rental = renter.Rentals.Find(r => (r.Transaction != null && r.Transaction.PaymentStatus == PaymentStatus.Deposit));
+            if (rental?.Transaction == null)
             {
                 return NotFound($"Renter {deviceCode} didn't have a transaction");
             }
-
-            if (renter.Rentals[^1].BikeId != bikeId)
+            
+            if (rental.BikeId != bikeId)
             {
                 return BadRequest($"Renter {deviceCode} didn't rent bike {bikeId}");
             }
-
-            var transaction = renter.Rentals[^1].Transaction;
-            var totalMinutes = (DateTime.Now- transaction.BookedStartDateTime).TotalMinutes;
+            
+            var transaction = rental.Transaction;
+            var totalMinutes = (DateTime.Now - transaction.BookedStartDateTime).TotalMinutes;
             var fee = CalculateFee(totalMinutes, bike.Type);
             _logger.LogInformation("Total minutes " + totalMinutes);
 

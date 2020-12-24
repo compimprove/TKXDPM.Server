@@ -19,8 +19,8 @@ namespace TKXDPM_API.Controllers
         
         private readonly Dictionary<BikeType, int> _condition = new Dictionary<BikeType, int>()
         {
-            {BikeType.Single, 550000},
-            {BikeType.Double, 700000},
+            {BikeType.Single, 400000},
+            {BikeType.Double, 550000},
             {BikeType.Electric, 700000}
         };
 
