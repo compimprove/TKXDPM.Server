@@ -159,7 +159,7 @@ namespace TKXDPM_API.Controllers
         {
             var bikeInStations
                 = await (from bikeInStation in _dbContext.BikeInStations
-                    where bikeInStation.BikeIsInStation(bikeId, stationId)
+                    where bikeInStation.BikeId == bikeId && bikeInStation.StationId == stationId
                     select bikeInStation).ToListAsync();
             return bikeInStations.Count != 0;
         }

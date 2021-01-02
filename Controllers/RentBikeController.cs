@@ -29,18 +29,14 @@ namespace TKXDPM_API.Controllers
         [HttpPost("rent-bike")]
         public async Task<ActionResult> RentBike(string deviceCode, int bikeId, int deposit)
         {
-            var renter = await _dbContext.Renters.
-                Where(r => r.DeviceCode == deviceCode).
-                Include(r => r.Card)
+            var renter = await _dbContext.Renters.Where(r => r.DeviceCode == deviceCode).Include(r => r.Card)
                 .FirstOrDefaultAsync();
             if (renter == null)
             {
                 return NotFound($"The Renter with device Code {deviceCode} Not Found");
             }
 
-            var bike = await _dbContext.Bikes.
-                Where(b => b.BikeId == bikeId).
-                Include(b => b.Rentals)
+            var bike = await _dbContext.Bikes.Where(b => b.BikeId == bikeId).Include(b => b.Rentals)
                 .ThenInclude(r => r.Transaction)
                 .FirstOrDefaultAsync();
             if (bike == null)
@@ -93,7 +89,9 @@ namespace TKXDPM_API.Controllers
                 r.IsInRentingState());
             if (rental != null)
             {
-                return _mapper.Map<BikeResponse>(rental.Bike);
+                var bikeResponse = _mapper.Map<BikeResponse>(rental.Bike);
+                bikeResponse.IsRented = true;
+                return bikeResponse;
             }
             else
             {
